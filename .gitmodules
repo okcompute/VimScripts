@@ -1,6 +1,6 @@
 [submodule "bundle/vimproj"]
 	path = bundle/vimproj
 	url = git@github.com:okcompute/vimproj.git
-[submodule "Bundle/Gundo"]
-	path = Bundle/Gundo
+[submodule "bundle/Gundo"]
+	path = bundle/Gundo
 	url = git://github.com/vim-scripts/Gundo.git
