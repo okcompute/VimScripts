@@ -185,11 +185,9 @@ set backup
 " Set up fonts
 "-----------------------------------------------------------------------------
 if has("mac")
-    let g:main_font = "Anonymous\\ Pro:h14"
-    let g:small_font = "Anonymous\\ Pro:h2"
+    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
 else
     let g:main_font = "Anonymous\\ Pro:h13"
-    let g:small_font = "Anonymous\\ Pro:h2"
 endif
 
 "-----------------------------------------------------------------------------
@@ -304,3 +302,8 @@ nnoremap <silent> ,a :FSHere<CR>
 " Gundo plugin
 "-----------------------------------------------------------------------------
 nnoremap <leader>u :GundoToggle<CR>
+
+"-----------------------------------------------------------------------------
+" Powerline plugin
+"-----------------------------------------------------------------------------
+let g:Powerline_symbols = 'fancy'
