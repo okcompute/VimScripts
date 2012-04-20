@@ -164,7 +164,7 @@ if has('win32') || has ('win64')
 endif
 
 " Alright... let's try this out
-imap jj <esc>
+imap jk <esc>
 
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=2048
