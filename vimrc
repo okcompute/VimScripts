@@ -172,14 +172,54 @@ set synmaxcol=2048
 " I don't like it when the matching parens are automatically highlighted
 let loaded_matchparen = 1
 
+" Close the buffer but not the window...one 'annoyance' of Vim fixed :) Found
+" this on stackoverflow
+nmap <leader>d :bprevious<CR>:bdelete #<CR>
+
+"-----------------------------------------------------------------------------
+" Backup files and directories
+"-----------------------------------------------------------------------------
+
+set backup
+
 " All backup files at the same place. Don't like having .swp or .~ files everywhere
 " on my system
-if has('win32') || has ('win64')
-    set backupdir=d:/vimbackups
-else
-    set backupdir=~/.vimbackup
+" Prepend OS-appropriate temporary directories to the backupdir list.
+
+if has("unix") " (including OS X)
+
+    " Remove the current directory from the backup directory list.
+    "
+    set backupdir-=.
+
+    " Save backup files in the current user's ~/tmp directory, or in the
+    " system /tmp directory if that's not possible.
+    "
+    set backupdir^=~/tmp,/tmp
+
+    " Try to put swap files in ~/tmp (using the munged full pathname of
+    " the file to ensure uniqueness). Use the same directory as the
+    " current file if ~/tmp isn't available.
+    "
+    set directory=~/tmp//,.
+
+elseif has('win32') || has ('win64')
+
+    " Remove the current directory from the backup directory list.
+    "
+    set backupdir-=.
+
+    " Save backup files in the current user's TEMP directory
+    " (that is, whatever the TEMP environment variable is set to).
+    "
+    set backupdir^=$TEMP
+
+    " Put swap files in TEMP, too.
+    "
+    set directory=$TEMP\\\\
+
 endif
-set backup
+
 
 "-----------------------------------------------------------------------------
 " Set up fonts
@@ -187,7 +227,7 @@ set backup
 if has("mac")
     let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
 else
-    let g:main_font = "Anonymous\\ Pro:h13"
+  let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h13"
 endif
 
 "-----------------------------------------------------------------------------
@@ -240,7 +280,7 @@ let g:netrw_list_hide= '.*\.swp$,.*\.pyc$'
 set tags=./tags;
 
 " Pydoc script location
-let g:pydoc_cmd = "python pydoc"
+let g:pydoc_cmd = "pydoc"
 
 "-----------------------------------------------------------------------------
 " Clang_complete
@@ -301,9 +341,11 @@ nnoremap <silent> ,a :FSHere<CR>
 "-----------------------------------------------------------------------------
 " Gundo plugin
 "-----------------------------------------------------------------------------
-nnoremap <leader>u :GundoToggle<CR>
+nnoremap <silent> <Leader>u :GundoToggle<CR>
 
 "-----------------------------------------------------------------------------
 " Powerline plugin
 "-----------------------------------------------------------------------------
 let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
+
