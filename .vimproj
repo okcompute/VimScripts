@@ -1,0 +1,8 @@
+" Files to be included in this project
+files = ./*.vim vimrc
+
+" Arguments passed to ctags. This is optional. One can still use the .ctags file for this purpose.
+ctags_args =
+
+" The command line tool to be called when :make is called. This is also optional
+makeprg = 
