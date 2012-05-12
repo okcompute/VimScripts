@@ -287,6 +287,13 @@ let g:pydoc_cmd = "pydoc"
 
 "}}}
 
+" Text files {{{
+
+" When editing text file, add the accents keymap
+autocmd BufEnter *.txt setlocal keymap=accents
+
+"}}}
+
 " Plugins
 "============
 
