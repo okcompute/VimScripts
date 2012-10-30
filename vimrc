@@ -1,11 +1,12 @@
-"-----------------------------------------------------------------------------
-" Cream Gvim stuff
-"-----------------------------------------------------------------------------
-set nocompatible
+" vim:fdm=marker
 
-"-----------------------------------------------------------------------------
-" Global Stuff
-"-----------------------------------------------------------------------------
+" Vim
+"============
+
+" Global Stuff {{{
+"=================
+
+set nocompatible
 
 " Get pathogen up and running
 filetype off 
@@ -176,9 +177,10 @@ let loaded_matchparen = 1
 " this on stackoverflow
 nmap <leader>d :bprevious<CR>:bdelete #<CR>
 
-"-----------------------------------------------------------------------------
-" Backup files and directories
-"-----------------------------------------------------------------------------
+"}}}
+
+" Backup files and directories {{{
+"==================================
 
 set backup
 
@@ -220,9 +222,9 @@ elseif has('win32') || has ('win64')
 
 endif
 
+"}}}
 
-"-----------------------------------------------------------------------------
-" Set up fonts
+" Set up fonts {{{
 "-----------------------------------------------------------------------------
 if has("mac")
     let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
@@ -230,9 +232,10 @@ else
   let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h13"
 endif
 
-"-----------------------------------------------------------------------------
-" Set up the window colors and size
-"-----------------------------------------------------------------------------
+"}}}
+
+" Set up the window colors and size {{{
+" =====================================
 if has("gui_running")
     exe "set guifont=" . g:main_font
     set background=dark
@@ -282,16 +285,19 @@ set tags=./tags;
 " Pydoc script location
 let g:pydoc_cmd = "pydoc"
 
-"-----------------------------------------------------------------------------
-" Text files
-"-----------------------------------------------------------------------------
+"}}}
+
+" Text files {{{
 
 " When editing text file, add the accents keymap
 autocmd BufEnter *.txt setlocal keymap=accents
 
-"-----------------------------------------------------------------------------
-" Clang_complete
-"-----------------------------------------------------------------------------
+"}}}
+
+" Plugins
+"============
+
+" Clang_complete {{{
 
 " Blocks are not enabled by default in clang. Cocoa frameworks use them
 " extensively.
@@ -326,33 +332,39 @@ if has('win32') || has ('win64')
     let g:clang_user_options = '-ID:/perforce/online/team/dev_branches/UserStorage/OnlineSDK/. 2>NUL || exit 0"'
 endif
 
-"-----------------------------------------------------------------------------
-" SuperTab plugin
-"-----------------------------------------------------------------------------
+"}}}
+
+" SuperTab plugin {{{
 
 " Disable supertab in text file. Was annoying!
 autocmd BufEnter *.txt let b:SuperTabDisabled=1
 
-"-----------------------------------------------------------------------------
-" FuzzyFinder plugin
+"}}}
+
+" FuzzyFinder plugin {{{
 "-----------------------------------------------------------------------------
 nnoremap <silent> <Leader>ft :FufTag<CR>
 nnoremap <silent> <Leader>ff :VimProjFuzzyFindFiles<CR>
 nnoremap <silent> <Leader>fb :FufBuffer<CR>
 
-"-----------------------------------------------------------------------------
-" FSwitch plugin
+"}}}
+
+" FSwitch plugin {{{
 "-----------------------------------------------------------------------------
 nnoremap <silent> ,a :FSHere<CR>
 
-"-----------------------------------------------------------------------------
-" Gundo plugin
+"}}}
+
+" Gundo plugin {{{
 "-----------------------------------------------------------------------------
 nnoremap <silent> <Leader>u :GundoToggle<CR>
 
-"-----------------------------------------------------------------------------
-" Powerline plugin
+"}}}
+
+" Powerline plugin {{{
 "-----------------------------------------------------------------------------
 let g:Powerline_symbols = 'fancy'
 set encoding=utf-8
+
+"}}}
 
