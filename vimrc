@@ -301,36 +301,38 @@ autocmd BufEnter *.txt setlocal keymap=accents
 
 " Blocks are not enabled by default in clang. Cocoa frameworks use them
 " extensively.
-if has('mac')
-    let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=50000 -fobjc-arc' 
-endif
+"if has('mac')
+    "let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=50000 -fobjc-arc' 
+"endif
 
-" Complete options (disable preview scratch window)
-set completeopt=menu,menuone,longest
+"" Complete options (disable preview scratch window)
+"set completeopt=menu,menuone,longest
 
-" Limit popup menu height
-set pumheight=15
+"" Limit popup menu height
+"set pumheight=15
 
-" SuperTab option for context aware completion
-let g:SuperTabDefaultCompletionType = "context"
+"" SuperTab option for context aware completion
+"let g:SuperTabDefaultCompletionType = "context"
 
-" Disable auto popup, use <Tab> to autocomplete
-let g:clang_complete_auto = 1
+"" Disable auto popup, use <Tab> to autocomplete
+"let g:clang_complete_auto = 1
 
-" Show clang errors in the quickfix window
-let g:clang_complete_copen = 1
+"" Show clang errors in the quickfix window
+"let g:clang_complete_copen = 1
 
-" Check for clang errors from time to time
-let g:clang_periodic_quickfix = 1
+"" Check for clang errors from time to time
+"let g:clang_periodic_quickfix = 1
 
-" The quotes at the beggining of clang_exec and at the end of clang_user_options are important, don't remove them
-" They basically trick vim into thinking clang executed fine, because the msvc build autocompletes correctly but fails
-" to compile.
-" Don't forget to put paths with spaces in quotes other wise vim won't be able to execute the command
-if has('win32') || has ('win64')
-    let g:clang_exec = '"clang'
-    let g:clang_user_options = '-ID:/perforce/online/team/dev_branches/UserStorage/OnlineSDK/. 2>NUL || exit 0"'
-endif
+"" The quotes at the beggining of clang_exec and at the end of clang_user_options are important, don't remove them
+"" They basically trick vim into thinking clang executed fine, because the msvc build autocompletes correctly but fails
+"" to compile.
+"" Don't forget to put paths with spaces in quotes other wise vim won't be able to execute the command
+"if has('win32') || has ('win64')
+    "let g:clang_exec = '"clang'
+    "let g:clang_user_options = '-ID:/perforce/online/team/dev_branches/UserStorage/OnlineSDK/. 2>NUL || exit 0"'
+"endif
+
+let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
 
 "}}}
 
