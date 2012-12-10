@@ -1,7 +1,7 @@
 " vim:fdm=marker
 
 " Vim
-"============
+"====
 
 " Global Stuff {{{
 "=================
@@ -17,7 +17,6 @@ call pathogen#runtime_append_all_bundles()
 " Set the HOME 
 if has('win32') || has ('win64')
     let $HOME = $VIM."/vimfiles"
-    "let $HOME = $VIM."d:"
 else
     let $VIMHOME = $HOME."/.vim"
 endif
@@ -39,10 +38,8 @@ set printoptions=header:0,duplex:long,paper:letter
 " set the search scan to wrap lines
 set wrapscan
 
-" I'm happy to type the case of things.  I tried the ignorecase, smartcase
-" thing but it just wasn't working out for me
-"set noignorecase
-set ignorecase "Plalancette: trying the ignore case
+" ignore case when searching
+set ignorecase
 
 " Make command line two lines high
 set ch=2
@@ -63,11 +60,7 @@ set stl=%f\ %m\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
 
-" Don't update the display while executing macros
-set lazyredraw
-
-" Don't show the current command int he lower right corner.  In OSX, if this is
-" set and lazyredraw is set then it's slow as molasses, so we unset this
+" show the current the command in lower righ corner
 set showcmd
 
 " Show the current mode
@@ -80,23 +73,13 @@ syntax on
 set mousehide
 
 " Set up the gui cursor to look nice
-set guicursor=n-v-c:block-Cursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor,r-cr:hor20-Cursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+"set guicursor=n-v-c:block-Cursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor,r-cr:hor20-Cursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
-" This is the timeout used while waiting for user input on a multi-keyed macro
-" or while just sitting and waiting for another key to be pressed measured
-" in milliseconds.
-"
-" i.e. for the ",d" command, there is a "timeoutlen" wait period between the
-"      "," key and the "d" key.  If the "d" key isn't pressed before the
-"      timeout expires, one of two things happens: The "," command is executed
-"      if there is one (which there isn't) or the command aborts.
-"set timeoutlen=500
-
-" Keep some stuff in the history
+" Keep more stuff in the history
 set history=100
 
 " These commands open folds
-"set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
+set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
 " When the page starts to scroll, keep the cursor 8 lines from the top and 8
 " lines from the bottom
@@ -111,7 +94,7 @@ set wildignore=*.o,*.obj,*.exe,*.hi,*.tmp,*~,*.pyc,*.swp
 " Enable search highlighting
 set hlsearch
 
-" Incrementally match the search
+" Incrementally match the search  
 set incsearch
 
 " Automatically read a file that has changed on disk
@@ -123,28 +106,11 @@ set number
 " System default for mappings is now the "," character
 let mapleader = ","
 
-" Turn off that stupid highlight search
+" Turn off highlight search
 nmap <silent> ,n :nohls<CR>
 
 " Show all available VIM servers
 nmap <silent> ,ss :echo serverlist()<CR>
-
-" Maps to make handling windows a bit easier
-noremap <silent> ,h :wincmd h<CR>
-noremap <silent> ,j :wincmd j<CR>
-noremap <silent> ,k :wincmd k<CR>
-noremap <silent> ,l :wincmd l<CR>
-noremap <silent> ,sb :wincmd p<CR>
-noremap <silent> ,cj :wincmd j<CR>:close<CR>
-noremap <silent> ,ck :wincmd k<CR>:close<CR>
-noremap <silent> ,ch :wincmd h<CR>:close<CR>
-noremap <silent> ,cl :wincmd l<CR>:close<CR>
-noremap <silent> ,cc :close<CR>
-noremap <silent> ,cw :cclose<CR>
-noremap <silent> ,ml <C-W>L
-noremap <silent> ,mk <C-W>K
-noremap <silent> ,mh <C-W>H
-noremap <silent> ,mj <C-W>J
 
 " Edit the vimrc file
 nmap <silent> ,ev :e $MYVIMRC<CR>
@@ -164,21 +130,46 @@ if has('win32') || has ('win64')
     nmap <silent> <F3> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 endif
 
-" Alright... let's try this out
+" Override the ESC to jk so my hands stays on the keyboard home row
 imap jk <esc>
 
-" Syntax coloring lines that are too long just slows down the world
-set synmaxcol=2048
+" When entering a buffer, change the current working directory
+autocmd BufEnter * cd %:p:h
 
-" I don't like it when the matching parens are automatically highlighted
-let loaded_matchparen = 1
+" disable toolbar
+set guioptions-=T
+
+" Configure the tags file  rule. 
+set tags=./tags;
+
+"}}}
+
+" Windows {{{
+"=================
+
+" Maps to make handling windows a bit easier
+noremap <silent> ,h :wincmd h<CR>
+noremap <silent> ,j :wincmd j<CR>
+noremap <silent> ,k :wincmd k<CR>
+noremap <silent> ,l :wincmd l<CR>
+noremap <silent> ,sb :wincmd p<CR>
+noremap <silent> ,cj :wincmd j<CR>:close<CR>
+noremap <silent> ,ck :wincmd k<CR>:close<CR>
+noremap <silent> ,ch :wincmd h<CR>:close<CR>
+noremap <silent> ,cl :wincmd l<CR>:close<CR>
+noremap <silent> ,cc :close<CR>
+noremap <silent> ,cw :cclose<CR>
+noremap <silent> ,ml <C-W>L
+noremap <silent> ,mk <C-W>K
+noremap <silent> ,mh <C-W>H
+noremap <silent> ,mj <C-W>J
 
 " Close the buffer but not the window...one 'annoyance' of Vim fixed :) Found
 " this on stackoverflow
 nmap <leader>d :bprevious<CR>:bdelete #<CR>
 
 "}}}
-
+"
 " Backup files and directories {{{
 "==================================
 
@@ -222,6 +213,8 @@ elseif has('win32') || has ('win64')
 
 endif
 
+let g:netrw_list_hide= '.*\.swp$,.*\.pyc$'
+
 "}}}
 
 " Set up fonts {{{
@@ -234,7 +227,7 @@ endif
 
 "}}}
 
-" Set up the window colors and size {{{
+" Colors, fonts and themes {{{
 " =====================================
 if has("gui_running")
     exe "set guifont=" . g:main_font
@@ -252,13 +245,24 @@ if has("gui_running")
 endif
 :nohls
 
-" When entering a buffer, change the current working directory
-autocmd BufEnter * cd %:p:h
 
-" disable toolbar
-set guioptions-=T
+" Directory. Ignore these files
+" Select the color scheme
+::colorscheme wombat
 
-" Perforce
+"}}}
+
+" Context specific
+"==================
+
+" Text files {{{
+
+" When editing text file, add the accents keymap
+autocmd BufEnter *.txt setlocal keymap=accents
+
+"}}}
+
+" Perforce {{{
 let s:IgnoreChange=0
 autocmd! FileChangedRO * nested
             \ let s:IgnoreChange=1 |
@@ -271,31 +275,17 @@ autocmd! FileChangedShell *
             \ else |
             \   let v:fcs_choice="ask" |
             \ endif
+"}}}
 
-
-" Directory. Ignore these files
-let g:netrw_list_hide= '.*\.swp$,.*\.pyc$'
-
-" Select the color scheme
-::colorscheme wombat
-
-" Configure the tags file search rule. 
-set tags=./tags;
+" Python {{{
 
 " Pydoc script location
 let g:pydoc_cmd = "pydoc"
 
 "}}}
 
-" Text files {{{
-
-" When editing text file, add the accents keymap
-autocmd BufEnter *.txt setlocal keymap=accents
-
-"}}}
-
 " Plugins
-"============
+"========
 
 " Clang_complete {{{
 
@@ -305,23 +295,20 @@ autocmd BufEnter *.txt setlocal keymap=accents
     "let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=50000 -fobjc-arc' 
 "endif
 
-"" Complete options (disable preview scratch window)
-"set completeopt=menu,menuone,longest
+" Complete options (disable preview scratch window)
+set completeopt=menu,menuone,longest
 
 "" Limit popup menu height
-"set pumheight=15
-
-"" SuperTab option for context aware completion
-"let g:SuperTabDefaultCompletionType = "context"
+set pumheight=15
 
 "" Disable auto popup, use <Tab> to autocomplete
-"let g:clang_complete_auto = 1
+let g:clang_complete_auto = 1
 
-"" Show clang errors in the quickfix window
-"let g:clang_complete_copen = 1
+" Show clang errors in the quickfix window
+let g:clang_complete_copen = 1
 
-"" Check for clang errors from time to time
-"let g:clang_periodic_quickfix = 1
+" Check for clang errors from time to time
+let g:clang_periodic_quickfix = 1
 
 "" The quotes at the beggining of clang_exec and at the end of clang_user_options are important, don't remove them
 "" They basically trick vim into thinking clang executed fine, because the msvc build autocompletes correctly but fails
@@ -340,6 +327,9 @@ let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchain
 
 " Disable supertab in text file. Was annoying!
 autocmd BufEnter *.txt let b:SuperTabDisabled=1
+
+"" SuperTab option for context aware completion
+let g:SuperTabDefaultCompletionType = "context"
 
 "}}}
 
@@ -369,4 +359,5 @@ let g:Powerline_symbols = 'fancy'
 set encoding=utf-8
 
 "}}}
+
 
