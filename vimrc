@@ -136,8 +136,8 @@ imap jk <esc>
 " When entering a buffer, change the current working directory
 autocmd BufEnter * cd %:p:h
 
-" disable toolbar
-set guioptions-=T
+" disable toolbar, menu and all scrollbars...this gonna be pure stuff :)
+set guioptions=g
 
 " Configure the tags file  rule. 
 set tags=./tags;
