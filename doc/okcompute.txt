@@ -93,6 +93,19 @@ y$ 		- yank du curseur jusqu'a la fin de la ligne
 p 		- put ou copie le dernier yank apres le curseur
 
 ================================================================
+ Trucs pour selectionner du texte en groupe
+================================================================
+<command>i{     - Effectue la commande sur le texte entre 2 bracket (ex: gci{
+                => commente le texte a l'intérieur des brackets
+<comand>ip      - Effectue la commande sur le texte object
+<command>a{     - Effecture la commande sur le texte entre 2 brackets incluant
+celles-ci
+<commande>is    - Effectue opération sur la sentence. Pratique en python. 
+                (ex: vis => sélectionne une fonction python complète)
+o               - Interchange le curseur entre le début et la fin de la
+                sélection. Tres pratique! 
+
+================================================================
  effacer
 ================================================================
 x 		- delete le charactere en dessous du curseur
