@@ -79,7 +79,7 @@ set mousehide
 set history=100
 
 " These commands open folds
-set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
+set foldopen=block,insert,mark,percent,quickfix,search,tag,undo
 
 " When the page starts to scroll, keep the cursor 8 lines from the top and 8
 " lines from the bottom
@@ -144,8 +144,17 @@ set tags=./tags;
 
 "}}}
 
+" Folding {{{
+"============
+autocmd FileType c setlocal foldmethod=syntax
+autocmd FileType cpp setlocal foldmethod=syntax
+autocmd FileType python setlocal foldmethod=indent
+autocmd FileType objc setlocal foldmethod=syntax
+
+"}}}
+
 " Windows {{{
-"=================
+"============
 
 " Maps to make handling windows a bit easier
 noremap <silent> ,h :wincmd h<CR>
