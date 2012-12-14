@@ -16,9 +16,6 @@
 [submodule "bundle/clang_complete"]
 	path = bundle/clang_complete
 	url = https://github.com/Rip-Rip/clang_complete.git
-[submodule "bundle/python-mode"]
-	path = bundle/python-mode
-	url = https://github.com/klen/python-mode.git
 [submodule "bundle/AutoTag"]
 	path = bundle/AutoTag
 	url = https://github.com/vim-scripts/AutoTag.git
@@ -52,3 +49,9 @@
 [submodule "bundle/bufkill"]
 	path = bundle/bufkill
 	url = https://github.com/vim-scripts/bufkill.vim.git
+[submodule "bundle/pyflakes-pathogen"]
+	path = bundle/pyflakes-pathogen
+	url = https://github.com/mitechie/pyflakes-pathogen
+[submodule "bundle/vim-pep8"]
+	path = bundle/vim-pep8
+	url = https://github.com/jbking/vim-pep8.git
