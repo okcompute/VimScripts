@@ -7,3 +7,5 @@ autoload/.DS_Store
 .VimballRecord
 *.*~
 *.swo
+_viminfo
+.vim-fuf-data/
