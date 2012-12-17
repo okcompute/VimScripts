@@ -144,15 +144,6 @@ set tags=./tags;
 
 "}}}
 
-" Folding {{{
-"============
-autocmd FileType c setlocal foldmethod=syntax
-autocmd FileType cpp setlocal foldmethod=syntax
-autocmd FileType python setlocal foldmethod=syntax
-autocmd FileType objc setlocal foldmethod=syntax
-
-"}}}
-
 " Windows {{{
 "============
 
@@ -284,13 +275,6 @@ autocmd! FileChangedShell *
             \ else |
             \   let v:fcs_choice="ask" |
             \ endif
-"}}}
-
-" Python {{{
-
-" Pydoc script location
-let g:pydoc_cmd = "pydoc"
-
 "}}}
 
 " Plugins
