@@ -148,7 +148,7 @@ set tags=./tags;
 "============
 autocmd FileType c setlocal foldmethod=syntax
 autocmd FileType cpp setlocal foldmethod=syntax
-autocmd FileType python setlocal foldmethod=indent
+autocmd FileType python setlocal foldmethod=syntax
 autocmd FileType objc setlocal foldmethod=syntax
 
 "}}}
@@ -362,4 +362,3 @@ let g:Powerline_symbols = 'fancy'
 set encoding=utf-8
 
 "}}}
-
