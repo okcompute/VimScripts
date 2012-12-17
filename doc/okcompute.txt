@@ -33,6 +33,8 @@ n               - Prochain mot trouver suite a une recherche
 N               - Precedent mot trouver suite a une recherche
 [[              - Va au debut de de la fonction precedente
 ]]              - Va au debut de de la fonction suivante
+]m              - Va au début de la prochaine méthode
+[m              - Va au début de la méthode précèdente
 ''              - Retourne a la position precedente
 0               - Aller au debut de la ligne (position 0)
 ^               - Aller au premier caractere (autre que l'espace) de la ligne 
