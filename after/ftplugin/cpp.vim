@@ -1,3 +1,3 @@
 " Folding 
 " "========
-autocmd FileType cpp setlocal foldmethod=syntax
+setlocal foldmethod=syntax

@@ -1,3 +1,3 @@
 " Folding "
 " ========
-autocmd FileType c setlocal foldmethod=syntax
+setlocal foldmethod=syntax

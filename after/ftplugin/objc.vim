@@ -1,3 +1,3 @@
 " Folding 
 " "========
-autocmd FileType objc setlocal foldmethod=syntax
+setlocal foldmethod=syntax
