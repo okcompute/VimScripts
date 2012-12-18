@@ -41,10 +41,6 @@
 	path = bundle/vim-indent-object
 	url = https://github.com/michaeljsmith/vim-indent-object.git
     ignore = untracked
-[submodule "bundle/vim-ios"]
-	path = bundle/vim-ios
-	url = https://github.com/eraserhd/vim-ios.git
-    ignore = untracked
 [submodule "bundle/cocoa.vim"]
 	path = bundle/cocoa.vim
 	url = https://github.com/msanders/cocoa.vim.git
