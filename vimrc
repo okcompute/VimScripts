@@ -228,7 +228,7 @@ endif
 "}}}
 
 " Colors, fonts and themes {{{
-" =====================================
+" ============================
 if has("gui_running")
     exe "set guifont=" . g:main_font
     set background=dark
@@ -249,6 +249,15 @@ endif
 " Directory. Ignore these files
 " Select the color scheme
 ::colorscheme wombat
+
+"}}}
+
+" Folding {{{
+" "==========
+autocmd FileType objc setlocal foldmethod=syntax
+autocmd FileType cpp setlocal foldmethod=syntax
+autocmd FileType c setlocal foldmethod=syntax
+autocmd FileType python setlocal foldmethod=syntax
 
 "}}}
 
