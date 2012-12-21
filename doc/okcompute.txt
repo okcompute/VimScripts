@@ -122,6 +122,8 @@ bd          - Fermer le buffer courant (Fait apparaitre le buffer suivant dans l
 bufdo bd    - Ferner tous les buffers ouvert
 b <tab>     - Changer de buffer. Tab passe au travers de la liste de tous les
 buffers ouverts.
+N,Mbd       - Fermer les buffers entre N et M
+N,$bd       - Fermer les buffers entre N et le dernier de la liste
 
 ================================================================
  files
