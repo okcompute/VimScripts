@@ -159,3 +159,8 @@ ctrl-T      - Reculer d'un cran dans la stack.
 :tag        - Avancer d'un cran dans le stack de tags
 :tags       - Afficher la stack de deplacement dans la tags
 
+================================================================
+  Command window (command history)
+================================================================
+q:          - Ouvre la fenêtre contenant la liste des dernières commandes
+(éditable!)

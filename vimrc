@@ -148,10 +148,10 @@ set tags=./tags;
 "============
 
 " Maps to make handling windows a bit easier
-noremap <silent> ,h :wincmd h<CR>
-noremap <silent> ,j :wincmd j<CR>
-noremap <silent> ,k :wincmd k<CR>
-noremap <silent> ,l :wincmd l<CR>
+noremap <silent> <C-h> :wincmd h<CR>
+noremap <silent> <C-j> :wincmd j<CR>
+noremap <silent> <C-k> :wincmd k<CR>
+noremap <silent> <C-l> :wincmd l<CR>
 noremap <silent> ,sb :wincmd p<CR>
 noremap <silent> ,cj :wincmd j<CR>:close<CR>
 noremap <silent> ,ck :wincmd k<CR>:close<CR>
