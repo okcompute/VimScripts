@@ -296,7 +296,7 @@ let g:clang_complete_copen = 1
 
 if has("mac")
     " Check for clang errors from time to time
-    let g:clang_periodic_quickfix = 1
+    " let g:clang_periodic_quickfix = 1
     
     let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
 else
