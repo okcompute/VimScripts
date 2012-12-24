@@ -50,10 +50,6 @@ set vb
 " Allow backspacing over indent, eol, and the start of an insert
 set backspace=2
 
-" Make sure that unsaved buffers that are to be put in the background are 
-" allowed to go in there (ie. the "must save first" error doesn't come up)
-set hidden
-
 " Set the status line
 set stl=%f\ %m\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
 
@@ -148,10 +144,10 @@ set tags=./tags;
 "============
 
 " Maps to make handling windows a bit easier
-noremap <silent> ,h :wincmd h<CR>
-noremap <silent> ,j :wincmd j<CR>
-noremap <silent> ,k :wincmd k<CR>
-noremap <silent> ,l :wincmd l<CR>
+noremap <silent> <C-h> :wincmd h<CR>
+noremap <silent> <C-j> :wincmd j<CR>
+noremap <silent> <C-k> :wincmd k<CR>
+noremap <silent> <C-l> :wincmd l<CR>
 noremap <silent> ,sb :wincmd p<CR>
 noremap <silent> ,cj :wincmd j<CR>:close<CR>
 noremap <silent> ,ck :wincmd k<CR>:close<CR>
