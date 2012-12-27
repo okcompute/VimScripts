@@ -29,10 +29,6 @@
 	path = bundle/L9
 	url = https://github.com/vim-scripts/L9.git
     ignore = untracked
-[submodule "bundle/FuzzyFinder"]
-	path = bundle/FuzzyFinder
-	url = https://github.com/vim-scripts/FuzzyFinder.git
-    ignore = untracked
 [submodule "bundle/vim-fswitch"]
 	path = bundle/vim-fswitch
 	url = https://github.com/derekwyatt/vim-fswitch.git
