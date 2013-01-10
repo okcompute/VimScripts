@@ -51,7 +51,7 @@ set vb
 set backspace=2
 
 " Set the status line
-set stl=%f\ %m\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
+set statusline=%f\ %m\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
 
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
@@ -356,5 +356,12 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
   endif
+"}}}
 
+" Syntastic plugin {{{
+"-----------------------------------------------------------------------------
+" Add info in the status line (this will only show when powerline is not used)
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 "}}}
