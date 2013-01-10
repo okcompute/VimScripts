@@ -75,3 +75,6 @@
 [submodule "bundle/python_match"]
 	path = bundle/python_match
 	url = https://github.com/vim-scripts/python_match.vim.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
