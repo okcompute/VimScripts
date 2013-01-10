@@ -57,10 +57,6 @@
 	path = bundle/pyflakes-pathogen
 	url = https://github.com/mitechie/pyflakes-pathogen
     ignore = untracked
-[submodule "bundle/vim-pep8"]
-	path = bundle/vim-pep8
-	url = https://github.com/jbking/vim-pep8.git
-    ignore = untracked
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
@@ -72,9 +68,12 @@
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
+    ignore = untracked
 [submodule "bundle/python_match"]
 	path = bundle/python_match
 	url = https://github.com/vim-scripts/python_match.vim.git
+    ignore = untracked
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
+    ignore = untracked
