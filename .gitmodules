@@ -53,10 +53,6 @@
 	path = bundle/bufkill
 	url = https://github.com/vim-scripts/bufkill.vim.git
     ignore = untracked
-[submodule "bundle/pyflakes-pathogen"]
-	path = bundle/pyflakes-pathogen
-	url = https://github.com/mitechie/pyflakes-pathogen
-    ignore = untracked
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
