@@ -5,10 +5,6 @@
 	path = bundle/Gundo
 	url = https://github.com/sjl/gundo.vim.git
     ignore = untracked
-[submodule "bundle/snipmate"]
-	path = bundle/snipmate
-	url = https://github.com/msanders/snipmate.vim.git
-    ignore = untracked
 [submodule "bundle/vim-powerline"]
 	path = bundle/vim-powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
@@ -28,10 +24,6 @@
 [submodule "bundle/L9"]
 	path = bundle/L9
 	url = https://github.com/vim-scripts/L9.git
-    ignore = untracked
-[submodule "bundle/FuzzyFinder"]
-	path = bundle/FuzzyFinder
-	url = https://github.com/vim-scripts/FuzzyFinder.git
     ignore = untracked
 [submodule "bundle/vim-fswitch"]
 	path = bundle/vim-fswitch
@@ -61,15 +53,23 @@
 	path = bundle/bufkill
 	url = https://github.com/vim-scripts/bufkill.vim.git
     ignore = untracked
-[submodule "bundle/pyflakes-pathogen"]
-	path = bundle/pyflakes-pathogen
-	url = https://github.com/mitechie/pyflakes-pathogen
-    ignore = untracked
-[submodule "bundle/vim-pep8"]
-	path = bundle/vim-pep8
-	url = https://github.com/jbking/vim-pep8.git
-    ignore = untracked
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
+    ignore = untracked
+[submodule "bundle/FuzzyFinder"]
+	path = bundle/FuzzyFinder
+	url = https://github.com/vim-scripts/FuzzyFinder.git
+    ignore = untracked
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+    ignore = untracked
+[submodule "bundle/python_match"]
+	path = bundle/python_match
+	url = https://github.com/vim-scripts/python_match.vim.git
+    ignore = untracked
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
     ignore = untracked

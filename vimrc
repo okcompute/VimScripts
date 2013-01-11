@@ -51,7 +51,7 @@ set vb
 set backspace=2
 
 " Set the status line
-set stl=%f\ %m\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
+set statusline=%f\ %m\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
 
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
@@ -292,7 +292,7 @@ let g:clang_complete_copen = 1
 
 if has("mac")
     " Check for clang errors from time to time
-    " let g:clang_periodic_quickfix = 1
+    let g:clang_periodic_quickfix = 1
     
     let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
 else
@@ -341,6 +341,29 @@ nnoremap <silent> <Leader>u :GundoToggle<CR>
 let g:Powerline_symbols = 'fancy'
 set encoding=utf-8
 
+"}}}
+
+" UltiSnips plugin {{{
+"-----------------------------------------------------------------------------
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"}}}
+
+" Matchit plugin {{{
+"-----------------------------------------------------------------------------
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+  endif
+"}}}
+
+" Syntastic plugin {{{
+"-----------------------------------------------------------------------------
+" Add info in the status line (this will only show when powerline is not used)
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 "}}}
 
 
