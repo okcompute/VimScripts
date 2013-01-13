@@ -409,7 +409,7 @@ function! SearchDash()
   execute s:cmd
   redraw!
 endfunction
-map <leader>k :call SearchDash()<CR>
+map K :call SearchDash()<CR>
 
 
 " Searches Google for the word under your cursor
