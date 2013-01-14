@@ -419,7 +419,6 @@ function! SearchDash()
   execute s:cmd
   redraw!
 endfunction
-<<<<<<< HEAD
 
 if has('mac')
 map K :call SearchDash()<CR>
