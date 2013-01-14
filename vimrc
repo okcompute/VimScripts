@@ -364,9 +364,19 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+let g:syntastic_mode_map = { 'mode': 'passive',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': [] }
+
+let g:syntastic_check_on_open=1
+let g:syntastic_python_checker="flake8"
+let g:syntastic_quiet_warnings=1
 "}}}
 
+" Dash search {{{
 
+"-----------------------------------------------------------------------------
 " Searches Dash for the word under your cursor in vim, using the keyword 
 " operator, based on file type. E.g. for JavaScript files, I have it 
 " configured to search j:term, which immediately brings up the JS doc
@@ -409,10 +419,29 @@ function! SearchDash()
   execute s:cmd
   redraw!
 endfunction
-map <leader>k :call SearchDash()<CR>
 
+if has('mac')
+map <leader>k :call SearchDash()<CR>
+endif
+"}}}
+
+" Google search {{{
+"-----------------------------------------------------------------------------
 
 " Searches Google for the word under your cursor
+function! SearchGoogleWindows()
+  Some setup
+  " let s:browser = "C:\\Program Files (x86)\\Safari\\safari.exe"
+  let s:browser = "c:\\progra~2\\safari\\safari.exe"
+  let s:wordUnderCursor = expand("<cword>")
+
+  " Run it
+  let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
+  let s:cmd ="silent ! ".s:browser." ".s:url
+  execute s:cmd
+  redraw!
+endfunction
+
 function! SearchGoogle()
   " Some setup
   let s:browser = "open"
@@ -424,5 +453,10 @@ function! SearchGoogle()
   execute s:cmd
   redraw!
 endfunction
-map <leader>g :call SearchGoogle()<CR>
 
+if has('win32') || has ('win64')
+    map <leader>g :call SearchGoogleWindows()<CR>
+else
+    map <leader>g :call SearchGoogle()<CR>
+endif
+"}}}
