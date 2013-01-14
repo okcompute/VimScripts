@@ -460,3 +460,11 @@ else
     map <leader>g :call SearchGoogle()<CR>
 endif
 "}}}
+
+" Local vimrc {{{
+let b:vim_local = findfile($HOME."/../_vimrc_local", &rtp)
+if filereadable(b:vim_local)
+    exe "source ".b:vim_local
+endif
+"}}}
+
