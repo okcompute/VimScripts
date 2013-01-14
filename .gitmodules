@@ -53,10 +53,6 @@
 	path = bundle/bufkill
 	url = https://github.com/vim-scripts/bufkill.vim.git
     ignore = untracked
-[submodule "bundle/tagbar"]
-	path = bundle/tagbar
-	url = https://github.com/majutsushi/tagbar.git
-    ignore = untracked
 [submodule "bundle/FuzzyFinder"]
 	path = bundle/FuzzyFinder
 	url = https://github.com/vim-scripts/FuzzyFinder.git
