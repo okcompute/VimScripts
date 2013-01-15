@@ -146,6 +146,17 @@ set viminfo^=!
 
 " Briefly show the matching paratheses, brackets, ...
 set showmatch
+
+" Add the mac fileformat as the possibilities
+set fileformats+=mac
+
+let g:netrw_list_hide= 'tags, .*\.swp$,.*\.pyc$'
+
+" Allow color schemes do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^linux'
+  set t_Co=16
+endif
+
 "}}}
 
 " Windows {{{
@@ -186,7 +197,6 @@ set backup
 if has("unix") " (including OS X)
 
     " Remove the current directory from the backup directory list.
-    "
     set backupdir-=.
 
     " Save backup files in the current user's ~/tmp directory, or in the
@@ -203,13 +213,11 @@ if has("unix") " (including OS X)
     " Save undo file. With this, no need to set hidden. I like it when Vim tells
     " me I forgot to save a file.
     set undofile
-
-    set undodir=~/.vim/undodir
+    set undodir^=~/.vim/undodir
 
 elseif has('win32') || has ('win64')
 
     " Remove the current directory from the backup directory list.
-    "
     set backupdir-=.
 
     " Save backup files in the current user's TEMP directory
@@ -224,12 +232,10 @@ elseif has('win32') || has ('win64')
     " Save undo file. With this, no need to set hidden. I like it when Vim tells
     " me I forgot to save a file.
     set undofile
-
-    set undodir=$TEMP/vim_undodir
+    set undodir^=$TEMP/vim/undodir
 
 endif
 
-let g:netrw_list_hide= '.*\.swp$,.*\.pyc$'
 
 "}}}
 
