@@ -96,6 +96,9 @@ set incsearch
 " Automatically read a file that has changed on disk
 set autoread
 
+" Remove my bad habit to press :w all the time!
+set autowrite
+
 " Make sure the line are displayed
 set number
 
@@ -138,10 +141,11 @@ set guioptions=g
 " Configure the tags file  rule. 
 set tags=./tags;
 
-" Save undo file. With this, no need to set hidden. I like it when Vim tells
-" me I forgot to save a file.
-set undofile
+" Save lots of info to get restored when starting Vim again.
+set viminfo^=!
 
+" Briefly show the matching paratheses, brackets, ...
+set showmatch
 "}}}
 
 " Windows {{{
@@ -196,6 +200,10 @@ if has("unix") " (including OS X)
     "
     set directory=~/tmp//,.
 
+    " Save undo file. With this, no need to set hidden. I like it when Vim tells
+    " me I forgot to save a file.
+    set undofile
+
     set undodir=~/.vim/undodir
 
 elseif has('win32') || has ('win64')
@@ -213,6 +221,9 @@ elseif has('win32') || has ('win64')
     "
     set directory=$TEMP\\\\
 
+    " Save undo file. With this, no need to set hidden. I like it when Vim tells
+    " me I forgot to save a file.
+    set undofile
 
     set undodir=$TEMP/vim_undodir
 
@@ -255,6 +266,13 @@ endif
 " Select the color scheme
 ::colorscheme wombat
 
+"}}}
+
+" Local vimrc {{{
+let b:vim_local = findfile($HOME."/../_vimrc_local", &rtp)
+if filereadable(b:vim_local)
+    exe "source ".b:vim_local
+endif
 "}}}
 
 " Context specific
@@ -470,12 +488,6 @@ else
 endif
 "}}}
 
-" Local vimrc {{{
-let b:vim_local = findfile($HOME."/../_vimrc_local", &rtp)
-if filereadable(b:vim_local)
-    exe "source ".b:vim_local
-endif
-"}}}
 
 " PythonMode {{{
 let g:pymode_lint_cwindow=0
