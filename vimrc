@@ -96,6 +96,9 @@ set incsearch
 " Automatically read a file that has changed on disk
 set autoread
 
+" Remove my bad habit to press :w all the time!
+set autowrite
+
 " Make sure the line are displayed
 set number
 
@@ -138,6 +141,11 @@ set guioptions=g
 " Configure the tags file  rule. 
 set tags=./tags;
 
+" Save lots of info to get restored when starting Vim again.
+set viminfo^=!
+
+" Briefly show the matching paratheses, brackets, ...
+set showmatch
 "}}}
 
 " Windows {{{
@@ -246,6 +254,13 @@ endif
 " Select the color scheme
 ::colorscheme wombat
 
+"}}}
+
+" Local vimrc {{{
+let b:vim_local = findfile($HOME."/../_vimrc_local", &rtp)
+if filereadable(b:vim_local)
+    exe "source ".b:vim_local
+endif
 "}}}
 
 " Context specific
@@ -461,10 +476,4 @@ else
 endif
 "}}}
 
-" Local vimrc {{{
-let b:vim_local = findfile($HOME."/../_vimrc_local", &rtp)
-if filereadable(b:vim_local)
-    exe "source ".b:vim_local
-endif
-"}}}
 
