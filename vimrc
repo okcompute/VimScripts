@@ -138,6 +138,10 @@ set guioptions=g
 " Configure the tags file  rule. 
 set tags=./tags;
 
+" Save undo file. With this, no need to set hidden. I like it when Vim tells
+" me I forgot to save a file.
+set undofile
+
 "}}}
 
 " Windows {{{
@@ -192,6 +196,8 @@ if has("unix") " (including OS X)
     "
     set directory=~/tmp//,.
 
+    set undodir=~/.vim/undodir
+
 elseif has('win32') || has ('win64')
 
     " Remove the current directory from the backup directory list.
@@ -206,6 +212,9 @@ elseif has('win32') || has ('win64')
     " Put swap files in TEMP, too.
     "
     set directory=$TEMP\\\\
+
+
+    set undodir=$TEMP/vim_undodir
 
 endif
 
@@ -468,3 +477,8 @@ if filereadable(b:vim_local)
 endif
 "}}}
 
+" PythonMode {{{
+let g:pymode_lint_cwindow=0
+let g:pymode_lint_onfly=1
+let g:pymode_lint_ignore="E124,E501"
+"}}}
