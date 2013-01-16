@@ -98,10 +98,6 @@ set autoread
 
 " Remove my bad habit to press :w all the time!
 set autowrite
-"
-" More to remove the need for pressing :w all the time.
-" This will save when leaving the insert mode and only if there were changes
-:autocmd InsertLeave <buffer> update 
 
 " Make sure the line are displayed
 set number
@@ -134,7 +130,7 @@ if has('win32') || has ('win64')
 endif
 
 " Override the ESC to jk so my hands stays on the keyboard home row
-imap jk <esc>
+imap jk <esc> :w<CR>
 
 " When entering a buffer, change the current working directory
 autocmd BufEnter * cd %:p:h
