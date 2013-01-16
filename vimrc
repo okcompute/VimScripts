@@ -320,21 +320,11 @@ set pumheight=15
 "" Disable auto popup, use <Tab> to autocomplete
 let g:clang_complete_auto = 1
 
-" Show clang errors in the quickfix window
-let g:clang_complete_copen = 1
-
 if has("mac")
     " Check for clang errors from time to time
     let g:clang_periodic_quickfix = 1
     
     let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-else
-"" The quotes at the beggining of clang_exec and at the end of clang_user_options are important, don't remove them
-"" They basically trick vim into thinking clang executed fine, because the msvc build autocompletes correctly but fails
-"" to compile.
-"" Don't forget to put paths with spaces in quotes other wise vim won't be able to execute the command
-"let g:clang_exec = '"clang'
-"let g:clang_user_options = '-ID:/perforce/online/team/dev_branches/UserStorage/OnlineSDK/. 2>NUL || exit 0"'
 endif
 
 "}}}
