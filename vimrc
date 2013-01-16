@@ -130,7 +130,7 @@ if has('win32') || has ('win64')
 endif
 
 " Override the ESC to jk so my hands stays on the keyboard home row
-imap jk <esc>
+imap jk <esc> :w <CR>
 
 " When entering a buffer, change the current working directory
 autocmd BufEnter * cd %:p:h
