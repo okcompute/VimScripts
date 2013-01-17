@@ -258,7 +258,9 @@ if has("gui_running")
         endif
         let g:vimrcloaded = 1
     endif
-elseif
+else
+    set background=dark
+
     colorscheme wombat256mod
 endif
 
