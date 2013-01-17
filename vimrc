@@ -152,11 +152,6 @@ set fileformats+=mac
 
 let g:netrw_list_hide= 'tags, .*\.swp$,.*\.pyc$'
 
-" Allow color schemes do bright colors without forcing bold.
-if &t_Co == 8 && $TERM !~# '^linux'
-  set t_Co=16
-endif
-
 "}}}
 
 " Windows {{{
@@ -236,24 +231,23 @@ elseif has('win32') || has ('win64')
 
 endif
 
-
 "}}}
 
-" Set up fonts {{{
-"-----------------------------------------------------------------------------
-if has("mac")
-    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
-else
-  let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h13"
-endif
-
-"}}}
 
 " Colors, fonts and themes {{{
 " =====================================
+if has("mac")
+    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
+else
+    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h13"
+endif
+
 if has("gui_running")
     exe "set guifont=" . g:main_font
+
     set background=dark
+
+    " Select the color scheme
     colorscheme wombat
     if !exists("g:vimrcloaded")
         winpos 0 0
@@ -264,13 +258,14 @@ if has("gui_running")
         endif
         let g:vimrcloaded = 1
     endif
+elseif
+    colorscheme wombat256mod
 endif
-:nohls
 
-
-" Directory. Ignore these files
-" Select the color scheme
-::colorscheme wombat
+" Allow color schemes do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^linux'
+    set t_Co=16
+endif
 
 "}}}
 
@@ -377,8 +372,8 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 "-----------------------------------------------------------------------------
 " Load matchit.vim, but only if the user hasn't installed a newer version.
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-  endif
+    runtime! macros/matchit.vim
+endif
 "}}}
 
 " Syntastic plugin {{{
@@ -389,8 +384,8 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_mode_map = { 'mode': 'passive',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': [] }
+            \ 'active_filetypes': [],
+            \ 'passive_filetypes': [] }
 
 let g:syntastic_check_on_open=1
 let g:syntastic_python_checker="flake8"
@@ -405,46 +400,46 @@ let g:syntastic_quiet_warnings=1
 " configured to search j:term, which immediately brings up the JS doc
 " for that keyword. Might need some customisation for your own keywords!
 function! SearchDash()
-  " Some setup
-  let s:browser = "/usr/bin/open"
-  let s:wordUnderCursor = expand("<cword>")
+    " Some setup
+    let s:browser = "/usr/bin/open"
+    let s:wordUnderCursor = expand("<cword>")
  
-  " Get the filetype (everything after the first ., for special cases
-  " such as index.html.haml or abc.css.scss.erb)
-  let s:fileType = substitute(expand("%"),"^[^.]*\.","",1)
+    " Get the filetype (everything after the first ., for special cases
+    " such as index.html.haml or abc.css.scss.erb)
+    let s:fileType = substitute(expand("%"),"^[^.]*\.","",1)
  
-  " Alternative ways of getting filetype, aborted
-  " let s:fileType = expand("%:e")
-  " let s:searchType = b:current_syntax.":"
+    " Alternative ways of getting filetype, aborted
+    " let s:fileType = expand("%:e")
+    " let s:searchType = b:current_syntax.":"
  
-  " Match it and set the searchType -- make sure these are the right shortcuts
-  " in Dash! Sort by priority in the match list below if necessary, because
-  " Tilt-enabled projects may have endings like .scss.erb. 
-  if match(s:fileType, "js") != -1
-    let s:searchType = "js:"     " can assign this to jQuery, too
-  elseif match(s:fileType, "css") != -1
-    let s:searchType = "css:"
-  elseif match(s:fileType, "html") != -1
-    let s:searchType = "html:"
-  elseif match(s:fileType, "rb") != -1
-    let s:searchType = "rb:"    " can assign this to Rails, too
-  elseif match(s:fileType, "php") != -1
-    let s:searchType = "php:"
-  elseif match(s:fileType, "py") != -1
-    let s:searchType = "python:"
-  else
-    let s:searchType = ""
-  endif
+    " Match it and set the searchType -- make sure these are the right shortcuts
+    " in Dash! Sort by priority in the match list below if necessary, because
+    " Tilt-enabled projects may have endings like .scss.erb. 
+    if match(s:fileType, "js") != -1
+        let s:searchType = "js:"     " can assign this to jQuery, too
+    elseif match(s:fileType, "css") != -1
+        let s:searchType = "css:"
+    elseif match(s:fileType, "html") != -1
+        let s:searchType = "html:"
+    elseif match(s:fileType, "rb") != -1
+        let s:searchType = "rb:"    " can assign this to Rails, too
+    elseif match(s:fileType, "php") != -1
+        let s:searchType = "php:"
+    elseif match(s:fileType, "py") != -1
+        let s:searchType = "python:"
+    else
+        let s:searchType = ""
+    endif
  
-  " Run it
-  let s:url = "dash://".s:searchType.s:wordUnderCursor
-  let s:cmd ="silent ! " . s:browser . " " . s:url
-  execute s:cmd
-  redraw!
+    " Run it
+    let s:url = "dash://".s:searchType.s:wordUnderCursor
+    let s:cmd ="silent ! " . s:browser . " " . s:url
+    execute s:cmd
+    redraw!
 endfunction
 
 if has('mac')
-map K :call SearchDash()<CR>
+    map K :call SearchDash()<CR>
 endif
 "}}}
 
@@ -453,28 +448,28 @@ endif
 
 " Searches Google for the word under your cursor
 function! SearchGoogleWindows()
-  Some setup
-  " let s:browser = "C:\\Program Files (x86)\\Safari\\safari.exe"
-  let s:browser = "c:\\progra~2\\safari\\safari.exe"
-  let s:wordUnderCursor = expand("<cword>")
+    Some setup
+    " let s:browser = "C:\\Program Files (x86)\\Safari\\safari.exe"
+    let s:browser = "c:\\progra~2\\safari\\safari.exe"
+    let s:wordUnderCursor = expand("<cword>")
 
-  " Run it
-  let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
-  let s:cmd ="silent ! ".s:browser." ".s:url
-  execute s:cmd
-  redraw!
+    " Run it
+    let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
+    let s:cmd ="silent ! ".s:browser." ".s:url
+    execute s:cmd
+    redraw!
 endfunction
 
 function! SearchGoogle()
-  " Some setup
-  let s:browser = "open"
-  let s:wordUnderCursor = expand("<cword>")
+    " Some setup
+    let s:browser = "open"
+    let s:wordUnderCursor = expand("<cword>")
 
-  " Run it
-  let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
-  let s:cmd ="!".s:browser." ".s:url
-  execute s:cmd
-  redraw!
+    " Run it
+    let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
+    let s:cmd ="!".s:browser." ".s:url
+    execute s:cmd
+    redraw!
 endfunction
 
 if has('win32') || has ('win64')
