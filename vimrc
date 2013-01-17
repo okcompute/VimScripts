@@ -233,9 +233,10 @@ endif
 
 "}}}
 
-
 " Colors, fonts and themes {{{
 " =====================================
+set background=dark
+
 if has("mac")
     let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
 else
@@ -244,8 +245,6 @@ endif
 
 if has("gui_running")
     exe "set guifont=" . g:main_font
-
-    set background=dark
 
     " Select the color scheme
     colorscheme wombat
@@ -259,8 +258,6 @@ if has("gui_running")
         let g:vimrcloaded = 1
     endif
 else
-    set background=dark
-
     colorscheme wombat256mod
 endif
 
