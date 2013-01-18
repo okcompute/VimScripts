@@ -233,7 +233,6 @@ endif
 
 "}}}
 
-
 " Colors, fonts and themes {{{
 " =====================================
 if has("mac")
@@ -281,6 +280,14 @@ endif
 " Context specific
 "==================
 
+" Grep {{{
+if has('win32') || has ('win64')
+    " Print line number (duh!) and make it recursive by default since ** doesn't work
+    " with findstr
+    set grepprg=findstr\ /n\ /s
+endif
+"}}}
+
 " Text files {{{
 
 " When editing text file, add the accents keymap
@@ -301,6 +308,93 @@ autocmd! FileChangedShell *
             \ else |
             \   let v:fcs_choice="ask" |
             \ endif
+"}}}
+
+" Dash search {{{
+
+"-----------------------------------------------------------------------------
+" Searches Dash for the word under your cursor in vim, using the keyword 
+" operator, based on file type. E.g. for JavaScript files, I have it 
+" configured to search j:term, which immediately brings up the JS doc
+" for that keyword. Might need some customisation for your own keywords!
+function! SearchDash()
+    " Some setup
+    let s:browser = "/usr/bin/open"
+    let s:wordUnderCursor = expand("<cword>")
+
+    " Get the filetype (everything after the first ., for special cases
+    " such as index.html.haml or abc.css.scss.erb)
+    let s:fileType = substitute(expand("%"),"^[^.]*\.","",1)
+
+    " Alternative ways of getting filetype, aborted
+    " let s:fileType = expand("%:e")
+    " let s:searchType = b:current_syntax.":"
+
+    " Match it and set the searchType -- make sure these are the right shortcuts
+    " in Dash! Sort by priority in the match list below if necessary, because
+    " Tilt-enabled projects may have endings like .scss.erb. 
+    if match(s:fileType, "js") != -1
+        let s:searchType = "js:"     " can assign this to jQuery, too
+    elseif match(s:fileType, "css") != -1
+        let s:searchType = "css:"
+    elseif match(s:fileType, "html") != -1
+        let s:searchType = "html:"
+    elseif match(s:fileType, "rb") != -1
+        let s:searchType = "rb:"    " can assign this to Rails, too
+    elseif match(s:fileType, "php") != -1
+        let s:searchType = "php:"
+    elseif match(s:fileType, "py") != -1
+        let s:searchType = "python:"
+    else
+        let s:searchType = ""
+    endif
+
+    " Run it
+    let s:url = "dash://".s:searchType.s:wordUnderCursor
+    let s:cmd ="silent ! " . s:browser . " " . s:url
+    execute s:cmd
+    redraw!
+endfunction
+
+if has('mac')
+    map K :call SearchDash()<CR>
+endif
+"}}}
+
+" Google search {{{
+"-----------------------------------------------------------------------------
+
+" Searches Google for the word under your cursor
+function! SearchGoogleWindows()
+    Some setup
+    " let s:browser = "C:\\Program Files (x86)\\Safari\\safari.exe"
+    let s:browser = "c:\\progra~2\\safari\\safari.exe"
+    let s:wordUnderCursor = expand("<cword>")
+
+    " Run it
+    let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
+    let s:cmd ="silent ! ".s:browser." ".s:url
+    execute s:cmd
+    redraw!
+endfunction
+
+function! SearchGoogle()
+    " Some setup
+    let s:browser = "open"
+    let s:wordUnderCursor = expand("<cword>")
+
+    " Run it
+    let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
+    let s:cmd ="!".s:browser." ".s:url
+    execute s:cmd
+    redraw!
+endfunction
+
+if has('win32') || has ('win64')
+    map <leader>g :call SearchGoogleWindows()<CR>
+else
+    map <leader>g :call SearchGoogle()<CR>
+endif
 "}}}
 
 " Plugins
@@ -392,93 +486,6 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 let g:syntastic_check_on_open=1
 let g:syntastic_python_checker="flake8"
 let g:syntastic_quiet_warnings=1
-"}}}
-
-" Dash search {{{
-
-"-----------------------------------------------------------------------------
-" Searches Dash for the word under your cursor in vim, using the keyword 
-" operator, based on file type. E.g. for JavaScript files, I have it 
-" configured to search j:term, which immediately brings up the JS doc
-" for that keyword. Might need some customisation for your own keywords!
-function! SearchDash()
-    " Some setup
-    let s:browser = "/usr/bin/open"
-    let s:wordUnderCursor = expand("<cword>")
- 
-    " Get the filetype (everything after the first ., for special cases
-    " such as index.html.haml or abc.css.scss.erb)
-    let s:fileType = substitute(expand("%"),"^[^.]*\.","",1)
- 
-    " Alternative ways of getting filetype, aborted
-    " let s:fileType = expand("%:e")
-    " let s:searchType = b:current_syntax.":"
- 
-    " Match it and set the searchType -- make sure these are the right shortcuts
-    " in Dash! Sort by priority in the match list below if necessary, because
-    " Tilt-enabled projects may have endings like .scss.erb. 
-    if match(s:fileType, "js") != -1
-        let s:searchType = "js:"     " can assign this to jQuery, too
-    elseif match(s:fileType, "css") != -1
-        let s:searchType = "css:"
-    elseif match(s:fileType, "html") != -1
-        let s:searchType = "html:"
-    elseif match(s:fileType, "rb") != -1
-        let s:searchType = "rb:"    " can assign this to Rails, too
-    elseif match(s:fileType, "php") != -1
-        let s:searchType = "php:"
-    elseif match(s:fileType, "py") != -1
-        let s:searchType = "python:"
-    else
-        let s:searchType = ""
-    endif
- 
-    " Run it
-    let s:url = "dash://".s:searchType.s:wordUnderCursor
-    let s:cmd ="silent ! " . s:browser . " " . s:url
-    execute s:cmd
-    redraw!
-endfunction
-
-if has('mac')
-    map K :call SearchDash()<CR>
-endif
-"}}}
-
-" Google search {{{
-"-----------------------------------------------------------------------------
-
-" Searches Google for the word under your cursor
-function! SearchGoogleWindows()
-    Some setup
-    " let s:browser = "C:\\Program Files (x86)\\Safari\\safari.exe"
-    let s:browser = "c:\\progra~2\\safari\\safari.exe"
-    let s:wordUnderCursor = expand("<cword>")
-
-    " Run it
-    let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
-    let s:cmd ="silent ! ".s:browser." ".s:url
-    execute s:cmd
-    redraw!
-endfunction
-
-function! SearchGoogle()
-    " Some setup
-    let s:browser = "open"
-    let s:wordUnderCursor = expand("<cword>")
-
-    " Run it
-    let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
-    let s:cmd ="!".s:browser." ".s:url
-    execute s:cmd
-    redraw!
-endfunction
-
-if has('win32') || has ('win64')
-    map <leader>g :call SearchGoogleWindows()<CR>
-else
-    map <leader>g :call SearchGoogle()<CR>
-endif
 "}}}
 
 " PythonMode {{{
