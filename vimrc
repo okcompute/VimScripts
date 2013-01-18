@@ -130,7 +130,7 @@ if has('win32') || has ('win64')
 endif
 
 " Override the ESC to jk so my hands stays on the keyboard home row
-imap jk <esc> :w<CR>
+imap jk <esc>:w<CR>
 
 " When entering a buffer, change the current working directory
 autocmd BufEnter * cd %:p:h
@@ -235,6 +235,8 @@ endif
 
 " Colors, fonts and themes {{{
 " =====================================
+set background=dark
+
 if has("mac")
     let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
 else
@@ -243,8 +245,6 @@ endif
 
 if has("gui_running")
     exe "set guifont=" . g:main_font
-
-    set background=dark
 
     " Select the color scheme
     colorscheme wombat
@@ -258,8 +258,6 @@ if has("gui_running")
         let g:vimrcloaded = 1
     endif
 else
-    set background=dark
-
     colorscheme wombat256mod
 endif
 
@@ -357,7 +355,7 @@ function! SearchDash()
 endfunction
 
 if has('mac')
-    map K :call SearchDash()<CR>
+    nnoremap <leader>k :call SearchDash()<CR>
 endif
 "}}}
 
