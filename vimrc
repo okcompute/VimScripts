@@ -96,6 +96,9 @@ set incsearch
 " Automatically read a file that has changed on disk
 set autoread
 
+" Remove my bad habit to press :w all the time!
+set autowrite
+
 " Make sure the line are displayed
 set number
 
@@ -127,7 +130,7 @@ if has('win32') || has ('win64')
 endif
 
 " Override the ESC to jk so my hands stays on the keyboard home row
-imap jk <esc>
+imap jk <esc> :w<CR>
 
 " When entering a buffer, change the current working directory
 autocmd BufEnter * cd %:p:h
@@ -137,6 +140,17 @@ set guioptions=g
 
 " Configure the tags file  rule. 
 set tags=./tags;
+
+" Save lots of info to get restored when starting Vim again.
+set viminfo^=!
+
+" Briefly show the matching paratheses, brackets, ...
+set showmatch
+
+" Add the mac fileformat as the possibilities
+set fileformats+=mac
+
+let g:netrw_list_hide= 'tags, .*\.swp$,.*\.pyc$'
 
 "}}}
 
@@ -178,7 +192,6 @@ set backup
 if has("unix") " (including OS X)
 
     " Remove the current directory from the backup directory list.
-    "
     set backupdir-=.
 
     " Save backup files in the current user's ~/tmp directory, or in the
@@ -192,10 +205,14 @@ if has("unix") " (including OS X)
     "
     set directory=~/tmp//,.
 
+    " Save undo file. With this, no need to set hidden. I like it when Vim tells
+    " me I forgot to save a file.
+    set undofile
+    set undodir^=~/.vim/undodir
+
 elseif has('win32') || has ('win64')
 
     " Remove the current directory from the backup directory list.
-    "
     set backupdir-=.
 
     " Save backup files in the current user's TEMP directory
@@ -207,27 +224,30 @@ elseif has('win32') || has ('win64')
     "
     set directory=$TEMP\\\\
 
-endif
+    " Save undo file. With this, no need to set hidden. I like it when Vim tells
+    " me I forgot to save a file.
+    set undofile
+    set undodir^=$TEMP/vim/undodir
 
-let g:netrw_list_hide= '.*\.swp$,.*\.pyc$'
-
-"}}}
-
-" Set up fonts {{{
-"-----------------------------------------------------------------------------
-if has("mac")
-    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
-else
-  let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h13"
 endif
 
 "}}}
+
 
 " Colors, fonts and themes {{{
 " =====================================
+if has("mac")
+    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
+else
+    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h13"
+endif
+
 if has("gui_running")
     exe "set guifont=" . g:main_font
+
     set background=dark
+
+    " Select the color scheme
     colorscheme wombat
     if !exists("g:vimrcloaded")
         winpos 0 0
@@ -238,14 +258,24 @@ if has("gui_running")
         endif
         let g:vimrcloaded = 1
     endif
+else
+    set background=dark
+
+    colorscheme wombat256mod
 endif
-:nohls
 
+" Allow color schemes do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^linux'
+    set t_Co=16
+endif
 
-" Directory. Ignore these files
-" Select the color scheme
-::colorscheme wombat
+"}}}
 
+" Local vimrc {{{
+let b:vim_local = findfile($HOME."/../_vimrc_local", &rtp)
+if filereadable(b:vim_local)
+    exe "source ".b:vim_local
+endif
 "}}}
 
 " Context specific
@@ -287,21 +317,11 @@ set pumheight=15
 "" Disable auto popup, use <Tab> to autocomplete
 let g:clang_complete_auto = 1
 
-" Show clang errors in the quickfix window
-let g:clang_complete_copen = 1
-
 if has("mac")
     " Check for clang errors from time to time
     let g:clang_periodic_quickfix = 1
     
     let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-else
-"" The quotes at the beggining of clang_exec and at the end of clang_user_options are important, don't remove them
-"" They basically trick vim into thinking clang executed fine, because the msvc build autocompletes correctly but fails
-"" to compile.
-"" Don't forget to put paths with spaces in quotes other wise vim won't be able to execute the command
-"let g:clang_exec = '"clang'
-"let g:clang_user_options = '-ID:/perforce/online/team/dev_branches/UserStorage/OnlineSDK/. 2>NUL || exit 0"'
 endif
 
 "}}}
@@ -354,8 +374,8 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 "-----------------------------------------------------------------------------
 " Load matchit.vim, but only if the user hasn't installed a newer version.
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-  endif
+    runtime! macros/matchit.vim
+endif
 "}}}
 
 " Syntastic plugin {{{
@@ -364,65 +384,105 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+let g:syntastic_mode_map = { 'mode': 'passive',
+            \ 'active_filetypes': [],
+            \ 'passive_filetypes': [] }
+
+let g:syntastic_check_on_open=1
+let g:syntastic_python_checker="flake8"
+let g:syntastic_quiet_warnings=1
 "}}}
 
+" Dash search {{{
 
+"-----------------------------------------------------------------------------
 " Searches Dash for the word under your cursor in vim, using the keyword 
 " operator, based on file type. E.g. for JavaScript files, I have it 
 " configured to search j:term, which immediately brings up the JS doc
 " for that keyword. Might need some customisation for your own keywords!
 function! SearchDash()
-  " Some setup
-  let s:browser = "/usr/bin/open"
-  let s:wordUnderCursor = expand("<cword>")
+    " Some setup
+    let s:browser = "/usr/bin/open"
+    let s:wordUnderCursor = expand("<cword>")
  
-  " Get the filetype (everything after the first ., for special cases
-  " such as index.html.haml or abc.css.scss.erb)
-  let s:fileType = substitute(expand("%"),"^[^.]*\.","",1)
+    " Get the filetype (everything after the first ., for special cases
+    " such as index.html.haml or abc.css.scss.erb)
+    let s:fileType = substitute(expand("%"),"^[^.]*\.","",1)
  
-  " Alternative ways of getting filetype, aborted
-  " let s:fileType = expand("%:e")
-  " let s:searchType = b:current_syntax.":"
+    " Alternative ways of getting filetype, aborted
+    " let s:fileType = expand("%:e")
+    " let s:searchType = b:current_syntax.":"
  
-  " Match it and set the searchType -- make sure these are the right shortcuts
-  " in Dash! Sort by priority in the match list below if necessary, because
-  " Tilt-enabled projects may have endings like .scss.erb. 
-  if match(s:fileType, "js") != -1
-    let s:searchType = "js:"     " can assign this to jQuery, too
-  elseif match(s:fileType, "css") != -1
-    let s:searchType = "css:"
-  elseif match(s:fileType, "html") != -1
-    let s:searchType = "html:"
-  elseif match(s:fileType, "rb") != -1
-    let s:searchType = "rb:"    " can assign this to Rails, too
-  elseif match(s:fileType, "php") != -1
-    let s:searchType = "php:"
-  elseif match(s:fileType, "py") != -1
-    let s:searchType = "python:"
-  else
-    let s:searchType = ""
-  endif
+    " Match it and set the searchType -- make sure these are the right shortcuts
+    " in Dash! Sort by priority in the match list below if necessary, because
+    " Tilt-enabled projects may have endings like .scss.erb. 
+    if match(s:fileType, "js") != -1
+        let s:searchType = "js:"     " can assign this to jQuery, too
+    elseif match(s:fileType, "css") != -1
+        let s:searchType = "css:"
+    elseif match(s:fileType, "html") != -1
+        let s:searchType = "html:"
+    elseif match(s:fileType, "rb") != -1
+        let s:searchType = "rb:"    " can assign this to Rails, too
+    elseif match(s:fileType, "php") != -1
+        let s:searchType = "php:"
+    elseif match(s:fileType, "py") != -1
+        let s:searchType = "python:"
+    else
+        let s:searchType = ""
+    endif
  
-  " Run it
-  let s:url = "dash://".s:searchType.s:wordUnderCursor
-  let s:cmd ="silent ! " . s:browser . " " . s:url
-  execute s:cmd
-  redraw!
+    " Run it
+    let s:url = "dash://".s:searchType.s:wordUnderCursor
+    let s:cmd ="silent ! " . s:browser . " " . s:url
+    execute s:cmd
+    redraw!
 endfunction
-map K :call SearchDash()<CR>
 
+if has('mac')
+    map K :call SearchDash()<CR>
+endif
+"}}}
+
+" Google search {{{
+"-----------------------------------------------------------------------------
 
 " Searches Google for the word under your cursor
-function! SearchGoogle()
-  " Some setup
-  let s:browser = "open"
-  let s:wordUnderCursor = expand("<cword>")
+function! SearchGoogleWindows()
+    Some setup
+    " let s:browser = "C:\\Program Files (x86)\\Safari\\safari.exe"
+    let s:browser = "c:\\progra~2\\safari\\safari.exe"
+    let s:wordUnderCursor = expand("<cword>")
 
-  " Run it
-  let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
-  let s:cmd ="!".s:browser." ".s:url
-  execute s:cmd
-  redraw!
+    " Run it
+    let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
+    let s:cmd ="silent ! ".s:browser." ".s:url
+    execute s:cmd
+    redraw!
 endfunction
-map <leader>g :call SearchGoogle()<CR>
 
+function! SearchGoogle()
+    " Some setup
+    let s:browser = "open"
+    let s:wordUnderCursor = expand("<cword>")
+
+    " Run it
+    let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
+    let s:cmd ="!".s:browser." ".s:url
+    execute s:cmd
+    redraw!
+endfunction
+
+if has('win32') || has ('win64')
+    map <leader>g :call SearchGoogleWindows()<CR>
+else
+    map <leader>g :call SearchGoogle()<CR>
+endif
+"}}}
+
+" PythonMode {{{
+let g:pymode_lint_cwindow=0
+let g:pymode_lint_onfly=1
+let g:pymode_lint_ignore="E124,E501"
+"}}}
