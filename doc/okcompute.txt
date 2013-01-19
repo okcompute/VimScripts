@@ -93,6 +93,7 @@ yy or Y  	- yank la ligne au complet
 p 		- put ou copie le dernier yank apres le curseur
 y$ 		- yank du curseur jusqu'a la fin de la ligne
 p 		- put ou copie le dernier yank apres le curseur
+]p, ]P          - paste after/before but adjust the indent
 
 ================================================================
  Trucs pour selectionner du texte en groupe
@@ -162,7 +163,8 @@ ctrl-T      - Reculer d'un cran dans la stack.
 :tags       - Afficher la stack de deplacement dans la tags
 
 ================================================================
-  Command window (command history)
+  History
 ================================================================
-q:          - Ouvre la fenêtre contenant la liste des dernières commandes
-(éditable!)
+q:          - Ouvre la fenêtre contenant la liste des dernières
+            commandes (éditable!)
+q/          - Ouvre une fenêtre listant les dernières recherches
