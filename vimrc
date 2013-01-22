@@ -41,6 +41,9 @@ set wrapscan
 " ignore case when searching
 set ignorecase
 
+" but allow to search with upper case when i want to
+set smartcase
+
 " Make command line two lines high
 set ch=2
 
