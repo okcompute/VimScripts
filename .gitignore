@@ -9,3 +9,4 @@ autoload/.DS_Store
 *.swo
 _viminfo
 .vim-fuf-data/
+.cache/

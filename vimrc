@@ -431,14 +431,6 @@ let g:SuperTabDefaultCompletionType = "context"
 
 "}}}
 
-" FuzzyFinder plugin {{{
-"-----------------------------------------------------------------------------
-nnoremap <silent> <Leader>ft :FufTag<CR>
-nnoremap <silent> <Leader>ff :VimProjFuzzyFindFiles<CR>
-nnoremap <silent> <Leader>fb :FufBuffer<CR>
-
-"}}}
-
 " FSwitch plugin {{{
 "-----------------------------------------------------------------------------
 nnoremap <silent> ,a :FSHere<CR>
@@ -493,4 +485,14 @@ let g:syntastic_quiet_warnings=1
 let g:pymode_lint_cwindow=0
 let g:pymode_lint_onfly=1
 let g:pymode_lint_ignore="E124,E501"
+"}}}
+
+" CtrlP {{{
+let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_root_markers = ['.ctags']
+let g:ctrlp_extensions = ['tag', 'buffertag']
+nnoremap <silent> <Leader>ff :CtrlP<CR>
+nnoremap <silent> <Leader>fb :CtrlPBuffer<CR>
+nnoremap <silent> <Leader>ft :CtrlPTag<CR>
+nnoremap <silent> <Leader>fc :CtrlPBufTag<CR>
 "}}}
