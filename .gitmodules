@@ -53,10 +53,6 @@
 	path = bundle/bufkill
 	url = https://github.com/vim-scripts/bufkill.vim.git
     ignore = untracked
-[submodule "bundle/FuzzyFinder"]
-	path = bundle/FuzzyFinder
-	url = https://github.com/vim-scripts/FuzzyFinder.git
-    ignore = untracked
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
@@ -72,6 +68,8 @@
 [submodule "bundle/python-mode"]
 	path = bundle/python-mode
 	url = https://github.com/klen/python-mode.git
+    ignore = untracked
 [submodule "bundle/ctrlp"]
 	path = bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
+    ignore = untracked
