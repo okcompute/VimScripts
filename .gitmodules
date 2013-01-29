@@ -21,10 +21,6 @@
 	path = bundle/AutoTag
 	url = https://github.com/vim-scripts/AutoTag.git
     ignore = untracked
-[submodule "bundle/L9"]
-	path = bundle/L9
-	url = https://github.com/vim-scripts/L9.git
-    ignore = untracked
 [submodule "bundle/vim-fswitch"]
 	path = bundle/vim-fswitch
 	url = https://github.com/derekwyatt/vim-fswitch.git
