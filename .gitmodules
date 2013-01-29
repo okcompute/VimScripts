@@ -1,6 +1,3 @@
-[submodule "bundle/vimproj"]
-	path = bundle/vimproj
-	url = https://github.com/okcompute/vimproj.git
 [submodule "bundle/Gundo"]
 	path = bundle/Gundo
 	url = https://github.com/sjl/gundo.vim.git
@@ -65,3 +62,6 @@
 	path = bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
     ignore = untracked
+[submodule "bundle/vim-ctags"]
+	path = bundle/vim-ctags
+	url = https://github.com/okcompute/vim-ctags.git
