@@ -261,7 +261,7 @@ if has("gui_running")
         let g:vimrcloaded = 1
     endif
 else
-    colorscheme wombat256mod
+    colorscheme desert
 endif
 
 " Allow color schemes do bright colors without forcing bold.
