@@ -57,10 +57,6 @@
 	path = bundle/python_match
 	url = https://github.com/vim-scripts/python_match.vim.git
     ignore = untracked
-[submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
-    ignore = untracked
 [submodule "bundle/python-mode"]
 	path = bundle/python-mode
 	url = https://github.com/klen/python-mode.git
