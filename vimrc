@@ -488,11 +488,17 @@ let g:pymode_lint_ignore="E124,E501"
 "}}}
 
 " CtrlP {{{
-let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.ctags']
 let g:ctrlp_extensions = ['tag', 'buffertag']
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|pdb|sln|suo)|(tag)$',
+  \ 'link': '',
+  \ }
 nnoremap <silent> <Leader>ff :CtrlP<CR>
 nnoremap <silent> <Leader>fb :CtrlPBuffer<CR>
 nnoremap <silent> <Leader>ft :CtrlPTag<CR>
 nnoremap <silent> <Leader>fc :CtrlPBufTag<CR>
+
 "}}}
