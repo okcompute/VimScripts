@@ -465,22 +465,6 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 endif
 "}}}
 
-" Syntastic plugin {{{
-"-----------------------------------------------------------------------------
-" Add info in the status line (this will only show when powerline is not used)
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_mode_map = { 'mode': 'passive',
-            \ 'active_filetypes': [],
-            \ 'passive_filetypes': [] }
-
-let g:syntastic_check_on_open=1
-let g:syntastic_python_checker="flake8"
-let g:syntastic_quiet_warnings=1
-"}}}
-
 " PythonMode {{{
 let g:pymode_lint_cwindow=0
 let g:pymode_lint_onfly=1
