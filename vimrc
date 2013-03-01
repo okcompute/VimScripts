@@ -100,7 +100,7 @@ set incsearch
 set autoread
 
 " Remove my bad habit to press :w all the time!
-set autowrite
+set autowriteall
 
 " Make sure the line are displayed
 set number
@@ -108,24 +108,24 @@ set number
 " System default for mappings is now the "," character
 let mapleader = ","
 
-" Turn off highlight search
-nmap <silent> ,n :nohls<CR>
+" " Turn off highlight search
+" nmap <silent> ,n :nohls<CR>
 
-" Show all available VIM servers
-nmap <silent> ,ss :echo serverlist()<CR>
+" " Show all available VIM servers
+" nmap <silent> ,ss :echo serverlist()<CR>
 
 " Edit the vimrc file
 nmap <silent> ,ev :e $MYVIMRC<CR>
 nmap <silent> ,sv :so $MYVIMRC<CR>
 
-" Search the current file for what's currently in the search register and display matches
-nmap <silent> ,gs :vimgrep /<C-r>// %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
+" " Search the current file for what's currently in the search register and display matches
+" nmap <silent> ,gs :vimgrep /<C-r>// %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
 
-" Search the current file for the word under the cursor and display matches
-nmap <silent> ,gw :vimgrep /<C-r><C-w>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
+" " Search the current file for the word under the cursor and display matches
+" nmap <silent> ,gw :vimgrep /<C-r><C-w>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
 
-" Search the current file for the WORD under the cursor and display matches
-nmap <silent> ,gW :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
+" " Search the current file for the WORD under the cursor and display matches
+" nmap <silent> ,gW :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
 
 " Toggle fullscreen mode
 if has('win32') || has ('win64')
@@ -161,21 +161,21 @@ let g:netrw_list_hide= 'tags, .*\.swp$,.*\.pyc$'
 "============
 
 " Maps to make handling windows a bit easier
-noremap <silent> <C-h> :wincmd h<CR>
-noremap <silent> <C-j> :wincmd j<CR>
-noremap <silent> <C-k> :wincmd k<CR>
-noremap <silent> <C-l> :wincmd l<CR>
-noremap <silent> ,sb :wincmd p<CR>
-noremap <silent> ,cj :wincmd j<CR>:close<CR>
-noremap <silent> ,ck :wincmd k<CR>:close<CR>
-noremap <silent> ,ch :wincmd h<CR>:close<CR>
-noremap <silent> ,cl :wincmd l<CR>:close<CR>
-noremap <silent> ,cc :close<CR>
-noremap <silent> ,cw :cclose<CR>
-noremap <silent> ,ml <C-W>L
-noremap <silent> ,mk <C-W>K
-noremap <silent> ,mh <C-W>H
-noremap <silent> ,mj <C-W>J
+" noremap <silent> <C-h> :wincmd h<CR>
+" noremap <silent> <C-j> :wincmd j<CR>
+" noremap <silent> <C-k> :wincmd k<CR>
+" noremap <silent> <C-l> :wincmd l<CR>
+" noremap <silent> ,sb :wincmd p<CR>
+" noremap <silent> ,cj :wincmd j<CR>:close<CR>
+" noremap <silent> ,ck :wincmd k<CR>:close<CR>
+" noremap <silent> ,ch :wincmd h<CR>:close<CR>
+" noremap <silent> ,cl :wincmd l<CR>:close<CR>
+" noremap <silent> ,cc :close<CR>
+" noremap <silent> ,cw :cclose<CR>
+" noremap <silent> ,ml <C-W>L
+" noremap <silent> ,mk <C-W>K
+" noremap <silent> ,mh <C-W>H
+" noremap <silent> ,mj <C-W>J
 
 " Close the buffer but not the window...one 'annoyance' of Vim fixed :) Found
 " this on stackoverflow
@@ -261,7 +261,7 @@ if has("gui_running")
         let g:vimrcloaded = 1
     endif
 else
-    colorscheme desert
+    colorscheme wombat256mod
 endif
 
 " Allow color schemes do bright colors without forcing bold.
@@ -415,7 +415,7 @@ let g:clang_complete_auto = 1
 if has("mac")
     " Check for clang errors from time to time
     let g:clang_periodic_quickfix = 1
-    
+
     let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
 endif
 
@@ -465,6 +465,19 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 endif
 "}}}
 
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_mode_map = { 'mode': 'passive',
+"             \ 'active_filetypes': [],
+"             \ 'passive_filetypes': [] }
+
+" let g:syntastic_check_on_open=1
+" let g:syntastic_python_checker="flake8"
+" let g:syntastic_quiet_warnings=1
+"}}}
+
 " PythonMode {{{
 let g:pymode_lint_cwindow=0
 let g:pymode_lint_onfly=1
@@ -480,6 +493,7 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|pdb|sln|suo)|(tag)$',
   \ 'link': '',
   \ }
+let g:ctrlp_max_height = 20
 nnoremap <silent> <Leader>ff :CtrlP<CR>
 nnoremap <silent> <Leader>fb :CtrlPBuffer<CR>
 nnoremap <silent> <Leader>ft :CtrlPTag<CR>
