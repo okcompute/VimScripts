@@ -465,9 +465,6 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 endif
 "}}}
 
-" Syntastic plugin {{{
-"-----------------------------------------------------------------------------
-" Add info in the status line (this will only show when powerline is not used)
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
