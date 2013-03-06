@@ -465,23 +465,12 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 endif
 "}}}
 
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_mode_map = { 'mode': 'passive',
-"             \ 'active_filetypes': [],
-"             \ 'passive_filetypes': [] }
-
-" let g:syntastic_check_on_open=1
-" let g:syntastic_python_checker="flake8"
-" let g:syntastic_quiet_warnings=1
-"}}}
-
 " PythonMode {{{
 let g:pymode_lint_cwindow=0
 let g:pymode_lint_onfly=1
 let g:pymode_lint_ignore="E124,E501"
+let pymode_utils_whitespaces=0
+let pymode_rope=0
 "}}}
 
 " CtrlP {{{
