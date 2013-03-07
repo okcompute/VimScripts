@@ -108,24 +108,9 @@ set number
 " System default for mappings is now the "," character
 let mapleader = ","
 
-" " Turn off highlight search
-" nmap <silent> ,n :nohls<CR>
-
-" " Show all available VIM servers
-" nmap <silent> ,ss :echo serverlist()<CR>
-
 " Edit the vimrc file
 nmap <silent> ,ev :e $MYVIMRC<CR>
 nmap <silent> ,sv :so $MYVIMRC<CR>
-
-" " Search the current file for what's currently in the search register and display matches
-" nmap <silent> ,gs :vimgrep /<C-r>// %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
-
-" " Search the current file for the word under the cursor and display matches
-" nmap <silent> ,gw :vimgrep /<C-r><C-w>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
-
-" " Search the current file for the WORD under the cursor and display matches
-" nmap <silent> ,gW :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
 
 " Toggle fullscreen mode
 if has('win32') || has ('win64')
@@ -157,32 +142,6 @@ let g:netrw_list_hide= 'tags, .*\.swp$,.*\.pyc$'
 
 "}}}
 
-" Windows {{{
-"============
-
-" Maps to make handling windows a bit easier
-" noremap <silent> <C-h> :wincmd h<CR>
-" noremap <silent> <C-j> :wincmd j<CR>
-" noremap <silent> <C-k> :wincmd k<CR>
-" noremap <silent> <C-l> :wincmd l<CR>
-" noremap <silent> ,sb :wincmd p<CR>
-" noremap <silent> ,cj :wincmd j<CR>:close<CR>
-" noremap <silent> ,ck :wincmd k<CR>:close<CR>
-" noremap <silent> ,ch :wincmd h<CR>:close<CR>
-" noremap <silent> ,cl :wincmd l<CR>:close<CR>
-" noremap <silent> ,cc :close<CR>
-" noremap <silent> ,cw :cclose<CR>
-" noremap <silent> ,ml <C-W>L
-" noremap <silent> ,mk <C-W>K
-" noremap <silent> ,mh <C-W>H
-" noremap <silent> ,mj <C-W>J
-
-" Close the buffer but not the window...one 'annoyance' of Vim fixed :) Found
-" this on stackoverflow
-nmap <leader>d :bprevious<CR>:bdelete #<CR>
-
-"}}}
-"
 " Backup files and directories {{{
 "==================================
 
@@ -272,9 +231,26 @@ endif
 "}}}
 
 " Local vimrc {{{
-let b:vim_local = findfile($HOME."/../_vimrc_local", &rtp)
-if filereadable(b:vim_local)
-    exe "source ".b:vim_local
+
+" Look for .local_vimrc file when opening any buffer.
+" This is really cool to get settings, abbr, etc. specific to 
+" a project.
+function! s:SetLocalVimrc()
+    let local_vimrc = findfile(".local_vimrc", ".;")
+    if filereadable(local_vimrc)
+        exe "source ".local_vimrc
+    endif
+endfunction
+autocmd BufNewFile,BufRead * call s:SetLocalVimrc()
+
+" Look for a .platform_vimrc when launching vim (or sourcing the vimrc).
+" Specific setting for the current platform/PC/environement can be set.
+" e.g.: Directory to start vim into
+" The file must be located at the same level of current .vimrc file 
+" or higher (up to root).
+let platform_vimrc = findfile(".platform_vimrc", ".;")
+if filereadable(platform_vimrc)
+    exe "source ".platform_vimrc 
 endif
 "}}}
 
