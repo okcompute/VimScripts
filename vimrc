@@ -248,9 +248,9 @@ autocmd BufNewFile,BufRead * call s:SetLocalVimrc()
 " e.g.: Directory to start vim into
 " The file must be located at the same level of current .vimrc file 
 " or higher (up to root).
-let platform_vimrc = findfile(".platform_vimrc", ".;")
-if filereadable(platform_vimrc)
-    exe "source ".platform_vimrc 
+let s:platform_vimrc= findfile($HOME."/../.platform_vimrc", &rtp)
+if filereadable(s:platform_vimrc)
+    exe "source ".s:platform_vimrc 
 endif
 "}}}
 
