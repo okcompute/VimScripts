@@ -448,7 +448,7 @@ endif
 
 " PythonMode {{{
 let g:pymode_lint_cwindow=0
-let g:pymode_lint_onfly=0
+let g:pymode_lint_onfly=1
 let g:pymode_lint_ignore="E124,E501"
 let pymode_rope=0
 "}}}
