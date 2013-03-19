@@ -65,6 +65,3 @@
 [submodule "bundle/vim-ctags"]
 	path = bundle/vim-ctags
 	url = https://github.com/okcompute/vim-ctags.git
-[submodule "bundle/jedi-vim"]
-	path = bundle/jedi-vim
-	url = https://github.com/davidhalter/jedi-vim.git
