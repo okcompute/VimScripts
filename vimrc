@@ -138,7 +138,7 @@ set showmatch
 " Add the mac fileformat as the possibilities
 set fileformats+=mac
 
-let g:netrw_list_hide= '^tags$, .*\.swp$,.*\.pyc$'
+let g:netrw_list_hide= '^tags$,.*\.swp$,.*\.pyc$,^\.ctags$,^\.gitignore$,^\.git\/$,^\.DS_Store$'
 
 "}}}
 
