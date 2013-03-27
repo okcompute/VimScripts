@@ -10,3 +10,4 @@ autoload/.DS_Store
 _viminfo
 .vim-fuf-data/
 .cache/
+undodir

@@ -138,7 +138,16 @@ set showmatch
 " Add the mac fileformat as the possibilities
 set fileformats+=mac
 
-let g:netrw_list_hide= '^tags$, .*\.swp$,.*\.pyc$'
+" Hide rule for netrw file browser
+let g:netrw_list_hide= '^tags$,.*\.swp$,.*\.pyc$,^\.ctags$,^\.gitignore$,^\.git\/$,^\.DS_Store$'
+
+" Try listchars settings from tpope's sensible.vim
+if &listchars ==# 'eol:$'
+    set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+    if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
+        let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+    endif
+endif
 
 "}}}
 
@@ -146,53 +155,30 @@ let g:netrw_list_hide= '^tags$, .*\.swp$,.*\.pyc$'
 "==================================
 
 set backup
+set undofile
 
 " All backup files at the same place. Don't like having .swp or .~ files everywhere
 " on my system
-" Prepend OS-appropriate temporary directories to the backupdir list.
-
 if has("unix") " (including OS X)
-
-    " Remove the current directory from the backup directory list.
-    set backupdir-=.
-
     " Save backup files in the current user's ~/tmp directory, or in the
     " system /tmp directory if that's not possible.
-    "
     set backupdir^=~/tmp,/tmp
 
-    " Try to put swap files in ~/tmp (using the munged full pathname of
+    " Try to put swap and undo files in ~/tmp (using the munged full pathname of
     " the file to ensure uniqueness). Use the same directory as the
     " current file if ~/tmp isn't available.
-    "
-    set directory=~/tmp//,.
-
-    " Save undo file. With this, no need to set hidden. I like it when Vim tells
-    " me I forgot to save a file.
-    set undofile
-    set undodir^=~/.vim/undodir
+    set directory^=~/tmp//,.
+    set undodir^=~/tmp//,.
 
 elseif has('win32') || has ('win64')
-
-    " Remove the current directory from the backup directory list.
-    set backupdir-=.
-
-    " Save backup files in the current user's TEMP directory
+    " Save backup , swap and undo files in the current user's TEMP directory
     " (that is, whatever the TEMP environment variable is set to).
-    "
-    set backupdir^=$TEMP
-
-    " Put swap files in TEMP, too.
-    "
-    set directory=$TEMP\\\\
-
-    " Save undo file. With this, no need to set hidden. I like it when Vim tells
-    " me I forgot to save a file.
-    set undofile
-    set undodir^=$TEMP/vim/undodir
+    " If not available, use the current directory. 
+    set backupdir^=$TEMP,.
+    set undodir^=$TEMP,.
+    set directory^=$TEMP,.
 
 endif
-
 "}}}
 
 " Colors, fonts and themes {{{
