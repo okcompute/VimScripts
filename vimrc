@@ -9,12 +9,12 @@
 set nocompatible
 
 " Get pathogen up and running
-filetype off 
+filetype off
 call pathogen#infect()
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 
-" Set the HOME 
+" Set the HOME
 if has('win32') || has ('win64')
     let $HOME = $VIM."/vimfiles"
 else
@@ -93,7 +93,7 @@ set wildignore=*.o,*.obj,*.exe,*.hi,*.tmp,*~,*.pyc,*.swp
 " Enable search highlighting
 set hlsearch
 
-" Incrementally match the search  
+" Incrementally match the search
 set incsearch
 
 " Automatically read a file that has changed on disk
@@ -126,7 +126,7 @@ autocmd BufEnter * cd %:p:h
 " disable toolbar, menu and all scrollbars...this gonna be pure stuff :)
 set guioptions=g
 
-" Configure the tags file  rule. 
+" Configure the tags file  rule.
 set tags=./tags;
 
 " Save lots of info to get restored when starting Vim again.
@@ -173,7 +173,7 @@ if has("unix") " (including OS X)
 elseif has('win32') || has ('win64')
     " Save backup , swap and undo files in the current user's TEMP directory
     " (that is, whatever the TEMP environment variable is set to).
-    " If not available, use the current directory. 
+    " If not available, use the current directory.
     set backupdir^=$TEMP,.
     set undodir^=$TEMP,.
     set directory^=$TEMP,.
@@ -219,7 +219,7 @@ endif
 " Local vimrc {{{
 
 " Look for .local_vimrc file when opening any buffer.
-" This is really cool to get settings, abbr, etc. specific to 
+" This is really cool to get settings, abbr, etc. specific to
 " a project.
 function! s:SetLocalVimrc()
     let local_vimrc = findfile(".local_vimrc", ".;")
@@ -232,11 +232,11 @@ autocmd BufNewFile,BufRead * call s:SetLocalVimrc()
 " Look for a .platform_vimrc when launching vim (or sourcing the vimrc).
 " Specific setting for the current platform/PC/environement can be set.
 " e.g.: Directory to start vim into
-" The file must be located at the same level of current .vimrc file 
+" The file must be located at the same level of current .vimrc file
 " or higher (up to root).
 let s:platform_vimrc= findfile($HOME."/../.platform_vimrc", &rtp)
 if filereadable(s:platform_vimrc)
-    exe "source ".s:platform_vimrc 
+    exe "source ".s:platform_vimrc
 endif
 "}}}
 
@@ -276,8 +276,8 @@ autocmd! FileChangedShell *
 " Dash search {{{
 
 "-----------------------------------------------------------------------------
-" Searches Dash for the word under your cursor in vim, using the keyword 
-" operator, based on file type. E.g. for JavaScript files, I have it 
+" Searches Dash for the word under your cursor in vim, using the keyword
+" operator, based on file type. E.g. for JavaScript files, I have it
 " configured to search j:term, which immediately brings up the JS doc
 " for that keyword. Might need some customisation for your own keywords!
 function! SearchDash()
