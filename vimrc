@@ -227,7 +227,7 @@ function! s:SetLocalVimrc()
         exe "source ".local_vimrc
     endif
 endfunction
-autocmd BufNewFile,BufRead * call s:SetLocalVimrc()
+autocmd BufRead * call s:SetLocalVimrc()
 
 " Look for a .platform_vimrc when launching vim (or sourcing the vimrc).
 " Specific setting for the current platform/PC/environement can be set.
