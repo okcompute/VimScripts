@@ -455,3 +455,12 @@ nnoremap <silent> <Leader>ft :CtrlPTag<CR>
 nnoremap <silent> <Leader>fc :CtrlPBufTag<CR>
 
 "}}}
+
+" Calendar {{{
+let g:calendar_datetime = 'statusline'
+let g:calendar_keys = {
+    \'goto_next_month': '<C-l>',
+    \'goto_prev_month': '<C-h>',
+    \'goto_next_year': '<C-k>',
+    \'goto_prev_year': '<C-j>' 
+    \}
