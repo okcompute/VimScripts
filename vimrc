@@ -118,7 +118,7 @@ if has('win32') || has ('win64')
 endif
 
 " Override the ESC to jk so my hands stays on the keyboard home row
-imap jk <esc>:w<CR>
+imap jk <esc>
 
 " When entering a buffer, change the current working directory
 autocmd BufEnter * cd %:p:h
@@ -412,8 +412,8 @@ nnoremap <silent> <Leader>u :GundoToggle<CR>
 
 " Powerline plugin {{{
 "-----------------------------------------------------------------------------
-let g:Powerline_symbols = 'fancy'
 set encoding=utf-8
+set rtp+=~\\bundle\\powerline\\powerline\\bindings\\vim
 
 "}}}
 
@@ -464,3 +464,4 @@ let g:calendar_keys = {
     \'goto_next_year': '<C-k>',
     \'goto_prev_year': '<C-j>' 
     \}
+"}}}
