@@ -233,9 +233,17 @@ autocmd BufRead * call s:SetLocalVimrc()
 " Look for a .vimrc_platform when launching vim (or sourcing the vimrc).
 " Specific setting for the current platform/PC/environement can be set.
 " e.g.: Directory to start vim into
+if has('win32') || has ('win64')
+    " The file must be located in the same folder as .vimrc file
+    " NOTE: gvim and .; param for findfile does not work as expected on Windows!
+    " It seems that when gvim start and parse the vimrc, the path returned is
+    " the path of the 'Start menu'. menu'!!. Go figure.
+    let s:vimrc_platform= expand(escape($HOME, '\')."/../.vimrc_platform")
+else
 " The file must be located at the same level of current .vimrc file
 " or higher (up to root).
 let s:vimrc_platform= findfile(".vimrc_platform", ".;")
+endif
 if filereadable(s:vimrc_platform)
     exe "source " . expand(s:vimrc_platform)
 endif
