@@ -71,9 +71,6 @@ syntax on
 " Hide the mouse pointer while typing
 set mousehide
 
-" Set up the gui cursor to look nice
-"set guicursor=n-v-c:block-Cursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor,r-cr:hor20-Cursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
-
 " Keep more stuff in the history
 set history=100
 
@@ -217,6 +214,7 @@ endif
 "}}}
 
 " Local vimrc {{{
+" ===============
 
 " Look for .local_vimrc file when opening any buffer.
 " This is really cool to get settings, abbr, etc. specific to
@@ -224,7 +222,7 @@ endif
 function! s:SetLocalVimrc()
     let local_vimrc = findfile(".local_vimrc", ".;")
     if filereadable(local_vimrc)
-        echo "Sourcing local .vimrc: ".s:local_vimrc
+        echo "Sourcing local .vimrc: ".local_vimrc
         exe "source ".local_vimrc
     endif
 endfunction
@@ -338,8 +336,14 @@ endif
 "}}}
 
 " JSON {{{
-"-----------------------------------------------------------------------------
+" ========
 autocmd BufNewFile,BufRead *.json set ft=javascript
+"}}}
+
+" Time {{{
+" ========
+" Display the time in the ex prompt
+command! Time echomsg strftime("%c")
 "}}}
 
 " Plugins
