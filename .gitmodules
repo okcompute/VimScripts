@@ -69,10 +69,6 @@
 	path = bundle/dash
 	url = https://github.com/rizzatti/dash.vim.git
     ignore = untracked
-[submodule "bundle/calendar-vim"]
-	path = bundle/calendar-vim
-	url = https://github.com/mattn/calendar-vim.git
-    ignore = untracked
 [submodule "bundle/powerline"]
 	path = bundle/powerline
 	url = https://github.com/Lokaltog/powerline.git
