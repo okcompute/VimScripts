@@ -88,7 +88,7 @@ set scrolloff=8
 set wildmenu
 
 " ignore files
-set wildignore=*.o,*.obj,*.exe,*.hi,*.tmp,*~,*.pyc,*.swp
+set wildignore=*.o,*.obj,*.exe,*.hi,*.tmp,*~,*.pyc,*.swp,environment,.git
 
 " Enable search highlighting
 set hlsearch
@@ -224,6 +224,7 @@ endif
 function! s:SetLocalVimrc()
     let local_vimrc = findfile(".local_vimrc", ".;")
     if filereadable(local_vimrc)
+        echo "Sourcing local .vimrc: ".s:platform_vimrc
         exe "source ".local_vimrc
     endif
 endfunction
@@ -234,9 +235,10 @@ autocmd BufRead * call s:SetLocalVimrc()
 " e.g.: Directory to start vim into
 " The file must be located at the same level of current .vimrc file
 " or higher (up to root).
-let s:platform_vimrc= findfile($HOME."/../.platform_vimrc", &rtp)
+let s:platform_vimrc= findfile(".vimrc_platform", ".;")
 if filereadable(s:platform_vimrc)
-    exe "source ".s:platform_vimrc
+    " silent echo "Sourcing platform specific .vimrc: ".s:platform_vimrc
+    exe "silent !source ".s:platform_vimrc
 endif
 "}}}
 
@@ -347,16 +349,18 @@ function! SearchGoogle()
     let s:wordUnderCursor = expand("<cword>")
 
     " Run it
-    let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
-    let s:cmd ="!".s:browser." ".s:url
+    let s:url = "https://encrypted.google.com/search?q=".s:wordUnderCursor
+    let s:cmd ="silent !".s:browser." ".s:url
     execute s:cmd
     redraw!
 endfunction
 
 if has('win32') || has ('win64')
     map <leader>g :call SearchGoogleWindows()<CR>
+    command! Google :call SearchGoogleWindows()<CR>
 else
     map <leader>g :call SearchGoogle()<CR>
+    command! Google :call SearchGoogle()
 endif
 "}}}
 
@@ -414,7 +418,6 @@ nnoremap <silent> <Leader>u :GundoToggle<CR>
 "-----------------------------------------------------------------------------
 set encoding=utf-8
 set rtp+=~\\bundle\\powerline\\powerline\\bindings\\vim
-
 "}}}
 
 " UltiSnips plugin {{{

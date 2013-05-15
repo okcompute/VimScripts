@@ -77,3 +77,6 @@
 	path = bundle/powerline
 	url = https://github.com/Lokaltog/powerline.git
     ignore = untracked
+[submodule "bundle/funcoo"]
+	path = bundle/funcoo
+	url = https://github.com/rizzatti/funcoo.vim.git
