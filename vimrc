@@ -224,21 +224,21 @@ endif
 function! s:SetLocalVimrc()
     let local_vimrc = findfile(".local_vimrc", ".;")
     if filereadable(local_vimrc)
-        echo "Sourcing local .vimrc: ".s:platform_vimrc
+        echo "Sourcing local .vimrc: ".s:vimrc_platform
         exe "source ".local_vimrc
     endif
 endfunction
 autocmd BufRead * call s:SetLocalVimrc()
 
-" Look for a .platform_vimrc when launching vim (or sourcing the vimrc).
+" Look for a .vimrc_platform when launching vim (or sourcing the vimrc).
 " Specific setting for the current platform/PC/environement can be set.
 " e.g.: Directory to start vim into
 " The file must be located at the same level of current .vimrc file
 " or higher (up to root).
-let s:platform_vimrc= findfile(".vimrc_platform", ".;")
-if filereadable(s:platform_vimrc)
-    " silent echo "Sourcing platform specific .vimrc: ".s:platform_vimrc
-    exe "silent !source ".s:platform_vimrc
+let s:vimrc_platform= findfile(".vimrc_platform", ".;")
+if filereadable(s:vimrc_platform)
+    echo "Sourcing platform specific .vimrc: ".s:vimrc_platform
+    exe "source " . expand(s:vimrc_platform)
 endif
 "}}}
 
@@ -417,7 +417,11 @@ nnoremap <silent> <Leader>u :GundoToggle<CR>
 " Powerline plugin {{{
 "-----------------------------------------------------------------------------
 set encoding=utf-8
-set rtp+=~\\bundle\\powerline\\powerline\\bindings\\vim
+if has('win32') || has ('win64')
+    set rtp+=~\\bundle\\powerline\\powerline\\bindings\\vim
+else
+    set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+endif
 "}}}
 
 " UltiSnips plugin {{{
@@ -457,14 +461,4 @@ nnoremap <silent> <Leader>fb :CtrlPBuffer<CR>
 nnoremap <silent> <Leader>ft :CtrlPTag<CR>
 nnoremap <silent> <Leader>fc :CtrlPBufTag<CR>
 
-"}}}
-
-" Calendar {{{
-let g:calendar_datetime = 'statusline'
-let g:calendar_keys = {
-    \'goto_next_month': '<C-l>',
-    \'goto_prev_month': '<C-h>',
-    \'goto_next_year': '<C-k>',
-    \'goto_prev_year': '<C-j>' 
-    \}
 "}}}
