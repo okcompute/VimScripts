@@ -224,7 +224,7 @@ endif
 function! s:SetLocalVimrc()
     let local_vimrc = findfile(".local_vimrc", ".;")
     if filereadable(local_vimrc)
-        echo "Sourcing local .vimrc: ".s:vimrc_platform
+        echo "Sourcing local .vimrc: ".s:local_vimrc
         exe "source ".local_vimrc
     endif
 endfunction
