@@ -237,7 +237,6 @@ autocmd BufRead * call s:SetLocalVimrc()
 " or higher (up to root).
 let s:vimrc_platform= findfile(".vimrc_platform", ".;")
 if filereadable(s:vimrc_platform)
-    echo "Sourcing platform specific .vimrc: ".s:vimrc_platform
     exe "source " . expand(s:vimrc_platform)
 endif
 "}}}
