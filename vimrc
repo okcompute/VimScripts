@@ -343,7 +343,7 @@ autocmd BufNewFile,BufRead *.json set ft=javascript
 " Time {{{
 " ========
 " Display the time in the ex prompt
-command! Time echomsg strftime("%c")
+command! T echomsg strftime("%c")
 "}}}
 
 " Plugins
