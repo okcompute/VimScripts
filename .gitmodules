@@ -34,10 +34,6 @@
 	path = bundle/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
     ignore = untracked
-[submodule "bundle/vim-scriptease"]
-	path = bundle/vim-scriptease
-	url = https://github.com/tpope/vim-scriptease.git
-    ignore = untracked
 [submodule "bundle/bufkill"]
 	path = bundle/bufkill
 	url = https://github.com/vim-scripts/bufkill.vim.git
