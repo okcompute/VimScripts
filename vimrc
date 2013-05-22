@@ -301,24 +301,12 @@ endif
 
 " Google search {{{
 "-----------------------------------------------------------------------------
-
-" Searches Google for the word under your cursor
-function! SearchGoogleWindows()
-    " Some setup
-    " let s:browser = "C:\\Program Files (x86)\\Safari\\safari.exe"
-    let s:browser = "c:\\progra~2\\safari\\safari.exe"
-    let s:wordUnderCursor = expand("<cword>")
-
-    " Run it
-    let s:url = "https://encrypted.google.com/search?q=". s:wordUnderCursor
-    let s:cmd ="silent ! ".s:browser." ".s:url
-    execute s:cmd
-    redraw!
-endfunction
-
 function! SearchGoogle()
     " Some setup
     let s:browser = "open"
+if has('win32') || has ('win64')
+    let s:browser = "cygstart"
+endif
     let s:wordUnderCursor = expand("<cword>")
 
     " Run it
@@ -328,11 +316,7 @@ function! SearchGoogle()
     redraw!
 endfunction
 
-if has('win32') || has ('win64')
-    command! Google :call SearchGoogleWindows()<CR>
-else
-    command! Google :call SearchGoogle()
-endif
+command! Google :call SearchGoogle()
 "}}}
 
 " JSON {{{
