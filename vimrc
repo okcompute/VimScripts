@@ -251,11 +251,7 @@ endif
 "==================
 
 " Grep {{{
-if has('win32') || has ('win64')
-    " Print line number (duh!) and make it recursive by default since ** doesn't work
-    " with findstr
-    set grepprg=findstr\ /n\ /s
-endif
+set grepprg=ack\ --smart-case   
 "}}}
 
 " Text files {{{
