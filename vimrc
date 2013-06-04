@@ -318,6 +318,7 @@ command! Google :call SearchGoogle()
 " JSON {{{
 " ========
 autocmd BufNewFile,BufRead *.json set ft=javascript
+command! Jsonify :%!python -m json.tool
 "}}}
 
 " Time {{{
