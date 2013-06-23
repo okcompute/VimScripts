@@ -375,11 +375,11 @@ nnoremap <silent> <Leader>u :GundoToggle<CR>
 " Powerline plugin {{{
 "-----------------------------------------------------------------------------
 set encoding=utf-8
-if has('win32') || has ('win64')
-    set rtp+=~\\bundle\\powerline\\powerline\\bindings\\vim
-else
-    set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-endif
+python << EOF
+from powerline.vim import setup as powerline_setup
+powerline_setup()
+del powerline_setup
+EOF
 "}}}
 
 " UltiSnips plugin {{{
