@@ -1,0 +1,5 @@
+--smart-case
+--ignore-dir=.git
+--ignore-dir=.cache
+--ignore-dir=.vim-fuf-data
+--ignore-file=match:^tags$
