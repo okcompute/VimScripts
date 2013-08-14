@@ -152,6 +152,8 @@ endif
 "==================================
 
 set backup
+" Save a copy of the file first time saving
+" set patchmode='.clean'
 set undofile
 
 " All backup files at the same place. Don't like having .swp or .~ files everywhere
@@ -171,10 +173,32 @@ elseif has('win32') || has ('win64')
     " Save backup , swap and undo files in the current user's TEMP directory
     " (that is, whatever the TEMP environment variable is set to).
     " If not available, use the current directory.
-    set backupdir^=$TEMP,.
-    set undodir^=$TEMP,.
-    set directory^=$TEMP,.
+    " set backupdir^=$TEMP.'\vim\backup\\',.
+    " set undodir^=$TEMP.'\vim\undo\\',.
+    " set directory^=$TEMP.'\vim\swap\\,.
 
+    " Backup folder
+    let s:backup_dir = $TEMP . "/vim/backup"
+    if finddir(s:backup_dir, &rtp) ==# ''
+        call mkdir(s:backup_dir)
+    endif
+    let s:backup_dir = s:backup_dir.'//'
+    set backupdir^=s:backupdir.'\\,.'
+
+    " Undo dir
+    let s:undo_dir = $TEMP . "/vim/undo"
+    if finddir(s:undo_dir, &rtp) ==# ''
+        call mkdir(s:undo_dir)
+    endif
+    let s:undo_dir = s:undo_dir.'//'
+    set undodir^=$TEMP.'\vim\undo\\',.
+
+    let s:swap_dir = $TEMP . "/vim/swap"
+    if finddir(s:swap_dir, &rtp) ==# ''
+        call mkdir(s:swap_dir)
+    endif
+    let s:swap_dir = s:swap_dir.'//'
+    set directory^=$TEMP.'\vim\swap\\,.
 endif
 "}}}
 
@@ -185,7 +209,7 @@ set background=dark
 if has("mac")
     let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
 else
-    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h12"
+    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h13"
 endif
 
 if has("gui_running")
@@ -219,11 +243,18 @@ endif
 " Look for .local_vimrc file when opening any buffer.
 " This is really cool to get settings, abbr, etc. specific to
 " a project.
+if !exists("g:local_vimrc")
+    let g:local_vimrc = ""
+:endif
 function! s:SetLocalVimrc()
     let local_vimrc = findfile(".local_vimrc", ".;")
+    if g:local_vimrc ==? local_vimrc
+        return
+    endif
     if filereadable(local_vimrc)
         echo "Sourcing local .vimrc: ".local_vimrc
         exe "source ".local_vimrc
+        let g:local_vimrc = local_vimrc
     endif
 endfunction
 autocmd BufRead * call s:SetLocalVimrc()
@@ -327,6 +358,13 @@ command! Jsonify :%!python -m json.tool
 command! T echomsg strftime("%c")
 "}}}
 
+" Autopep8  {{{
+" ========
+" Automatically fix PEP8 issues in the current buffer.
+command! Pep8 !autopep8 -i --ignore=E26 %
+"}}}
+
+
 " Plugins
 "========
 
@@ -363,6 +401,7 @@ let g:SuperTabDefaultCompletionType = "context"
 " FSwitch plugin {{{
 "-----------------------------------------------------------------------------
 nnoremap <silent> ,a :FSHere<CR>
+let g:fsnonewfiles='off'
 
 "}}}
 
@@ -409,14 +448,17 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.ctags']
 let g:ctrlp_extensions = ['tag', 'buffertag']
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|pdb|sln|suo)|(tag)$',
+  \ 'dir': '\v(\.git|\.hg|\.svn|environment|external|Build|buildfolder|pydev|memcached|Logs|dependencies|UserDoc|Extern|Doc|Images)$',
+  \ 'file': '\v(\.exe|\.so|\.dll|\.pdb|\.sln|\.suo|tags|\.csproj|\.txt|\.dox|\.jpg|\.jpeg|\.gif|\.png|\.bpt|\.tlog|\.pdf)$',
   \ 'link': '',
   \ }
 let g:ctrlp_max_height = 20
+" No limits on files
+let g:ctrlp_max_files = 0
+" Unlimited depth 
+let g:ctrlp_max_depth = 100
 nnoremap <silent> <Leader>ff :CtrlP<CR>
 nnoremap <silent> <Leader>fb :CtrlPBuffer<CR>
 nnoremap <silent> <Leader>ft :CtrlPTag<CR>
 nnoremap <silent> <Leader>fc :CtrlPBufTag<CR>
-
 "}}}
