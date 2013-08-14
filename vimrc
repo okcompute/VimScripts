@@ -152,8 +152,6 @@ endif
 "==================================
 
 set backup
-" Save a copy of the file first time saving
-" set patchmode='.clean'
 set undofile
 
 " All backup files at the same place. Don't like having .swp or .~ files everywhere
@@ -176,29 +174,32 @@ elseif has('win32') || has ('win64')
     " set backupdir^=$TEMP.'\vim\backup\\',.
     " set undodir^=$TEMP.'\vim\undo\\',.
     " set directory^=$TEMP.'\vim\swap\\,.
+    "
+    " Main vim backup folder
+    let s:temp_vim_dir = $TEMP . "/vim"
+    if finddir(s:temp_vim_dir, &rtp) ==# ''
+        call mkdir(s:temp_vim_dir)
+    endif
 
     " Backup folder
     let s:backup_dir = $TEMP . "/vim/backup"
     if finddir(s:backup_dir, &rtp) ==# ''
         call mkdir(s:backup_dir)
     endif
-    let s:backup_dir = s:backup_dir.'//'
-    set backupdir^=s:backupdir.'\\,.'
+    execute "set backupdir^=".s:backup_dir."//"
 
     " Undo dir
     let s:undo_dir = $TEMP . "/vim/undo"
     if finddir(s:undo_dir, &rtp) ==# ''
         call mkdir(s:undo_dir)
     endif
-    let s:undo_dir = s:undo_dir.'//'
-    set undodir^=$TEMP.'\vim\undo\\',.
+    execute "set undodir^=".s:undo_dir."//"
 
     let s:swap_dir = $TEMP . "/vim/swap"
     if finddir(s:swap_dir, &rtp) ==# ''
         call mkdir(s:swap_dir)
     endif
-    let s:swap_dir = s:swap_dir.'//'
-    set directory^=$TEMP.'\vim\swap\\,.
+    execute "set directory^=".s:swap_dir."//"
 endif
 "}}}
 
