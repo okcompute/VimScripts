@@ -2,14 +2,6 @@
 	path = bundle/Gundo
 	url = https://github.com/sjl/gundo.vim.git
     ignore = untracked
-[submodule "bundle/supertab"]
-	path = bundle/supertab
-	url = https://github.com/ervandew/supertab.git
-    ignore = untracked
-[submodule "bundle/clang_complete"]
-	path = bundle/clang_complete
-	url = https://github.com/Rip-Rip/clang_complete.git
-    ignore = untracked
 [submodule "bundle/AutoTag"]
 	path = bundle/AutoTag
 	url = https://github.com/vim-scripts/AutoTag.git
