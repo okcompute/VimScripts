@@ -246,7 +246,7 @@ endif
 " a project.
 if !exists("g:local_vimrc")
     let g:local_vimrc = ""
-:endif
+endif
 function! s:SetLocalVimrc()
     let local_vimrc = findfile(".local_vimrc", ".;")
     if g:local_vimrc ==? local_vimrc
@@ -369,36 +369,6 @@ command! Pep8 !autopep8 -i --ignore=E26 %
 " Plugins
 "========
 
-" Clang_complete {{{
-
-" Complete options (disable preview scratch window)
-set completeopt=menu,menuone,longest
-
-"" Limit popup menu height
-set pumheight=15
-
-"" Disable auto popup, use <Tab> to autocomplete
-let g:clang_complete_auto = 1
-
-if has("mac")
-    " Check for clang errors from time to time
-    let g:clang_periodic_quickfix = 1
-
-    let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-endif
-
-"}}}
-
-" SuperTab plugin {{{
-
-" Disable supertab in text file. Was annoying!
-autocmd BufEnter *.txt let b:SuperTabDisabled=1
-
-"" SuperTab option for context aware completion
-let g:SuperTabDefaultCompletionType = "context"
-
-"}}}
-
 " FSwitch plugin {{{
 "-----------------------------------------------------------------------------
 nnoremap <silent> ,a :FSHere<CR>
@@ -454,6 +424,7 @@ endif
 
 " PythonMode {{{
 let g:pymode_lint_cwindow=0
+let g:pymode_lint = 0
 let g:pymode_lint_onfly=1
 let g:pymode_lint_ignore="E124,E501"
 let pymode_rope=0
@@ -477,4 +448,15 @@ nnoremap <silent> <Leader>ff :CtrlP<CR>
 nnoremap <silent> <Leader>fb :CtrlPBuffer<CR>
 nnoremap <silent> <Leader>ft :CtrlPTag<CR>
 nnoremap <silent> <Leader>fc :CtrlPBufTag<CR>
+"}}}
+
+" Syntastic {{{
+let g:syntastic_check_on_open=1
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_jump=1
+let g:syntastic_python_flake8_args='--ignore=E501, E124'
+"}}}
+
+" YouCompleteMe {{{
+let g:ycm_confirm_extra_conf = 0
 "}}}
