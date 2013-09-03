@@ -461,3 +461,9 @@ let g:syntastic_python_flake8_args='--ignore=E501,E124'
 " YouCompleteMe {{{
 let g:ycm_confirm_extra_conf = 0
 "}}}
+
+" Python-syntax {{{
+" q
+let python_highlight_all = 1
+autocmd BufEnter *.py let b:python_version_2 = 1
+"}}}
