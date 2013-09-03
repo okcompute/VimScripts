@@ -208,7 +208,7 @@ endif
 set background=dark
 
 if has("mac")
-    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
+    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h16"
 else
     let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h13"
 endif
