@@ -425,6 +425,7 @@ endif
 " PythonMode {{{
 let g:pymode_lint = 0
 let pymode_rope=0
+let g:pymode_syntax=0
 "}}}
 
 " CtrlP {{{
@@ -460,7 +461,6 @@ let g:ycm_confirm_extra_conf = 0
 "}}}
 
 " Python-syntax {{{
-" q
 let python_highlight_all = 1
 autocmd BufEnter *.py let b:python_version_2 = 1
 "}}}
