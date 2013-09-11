@@ -99,6 +99,9 @@ set autoread
 " Remove my bad habit to press :w all the time!
 set autowriteall
 
+" Automatic save when leaving insert mode (no save if file has not changed)
+:au InsertLeave * update
+
 " Make sure the line are displayed
 set number
 
@@ -145,6 +148,7 @@ if &listchars ==# 'eol:$'
         let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
     endif
 endif
+
 
 "}}}
 
@@ -362,7 +366,7 @@ command! T echomsg strftime("%c")
 " Autopep8  {{{
 " ========
 " Automatically fix PEP8 issues in the current buffer.
-command! Pep8 !autopep8 -i --ignore=E26 %
+command! Pep8 !autopep8 -i --max-line-length=120 %
 "}}}
 
 
