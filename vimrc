@@ -212,7 +212,7 @@ endif
 set background=dark
 
 if has("mac")
-    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
+    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h16"
 else
     let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h13"
 endif
@@ -427,11 +427,9 @@ endif
 "}}}
 
 " PythonMode {{{
-let g:pymode_lint_cwindow=0
 let g:pymode_lint = 0
-let g:pymode_lint_onfly=1
-let g:pymode_lint_ignore="E124,E501"
 let pymode_rope=0
+let g:pymode_syntax=0
 "}}}
 
 " CtrlP {{{
@@ -464,4 +462,9 @@ let g:syntastic_python_flake8_args='--ignore=E501,E124'
 
 " YouCompleteMe {{{
 let g:ycm_confirm_extra_conf = 0
+"}}}
+
+" Python-syntax {{{
+let python_highlight_all = 1
+autocmd BufEnter *.py let b:python_version_2 = 1
 "}}}
