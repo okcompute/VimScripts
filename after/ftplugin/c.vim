@@ -1,3 +1,0 @@
-" Folding "
-" ========
-setlocal foldmethod=syntax
