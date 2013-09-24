@@ -1,5 +1,3 @@
-setlocal foldcolumn=3
-
 function! ObjectiveCFolds()
   let line = getline(v:lnum)
   if match(line, '^@\(protocol\|interface\|implementation\)') >= 0
