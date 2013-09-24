@@ -342,7 +342,7 @@ endif
     let s:wordUnderCursor = expand("<cword>")
 
     " Run it
-    let s:url = "https://encrypted.google.com/search?q=".s:wordUnderCursor
+    let s:url = "https://www.google.com/search?q=".s:wordUnderCursor
     let s:cmd ="silent !".s:browser." ".s:url
     execute s:cmd
     redraw!
