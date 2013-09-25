@@ -121,7 +121,7 @@ endif
 imap jk <esc>
 
 " When entering a buffer, change the current working directory
-autocmd BufEnter * cd %:p:h
+set autochdir
 
 " disable toolbar, menu and all scrollbars...this gonna be pure stuff :)
 set guioptions=g
