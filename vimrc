@@ -287,9 +287,9 @@ if has('win32') || has ('win64')
     " the path of the 'Start menu'. menu'!!. Go figure.
     let s:vimrc_platform= expand(escape($HOME, '\')."/../.vimrc_platform")
 else
-" The file must be located at the same level of current .vimrc file
-" or higher (up to root).
-let s:vimrc_platform= findfile(".vimrc_platform", ".;")
+    " The file must be located at the same level of current .vimrc file
+    " or higher (up to root).
+    let s:vimrc_platform= findfile(".vimrc_platform", ".;")
 endif
 if filereadable(s:vimrc_platform)
     exe "source " . expand(s:vimrc_platform)
@@ -379,7 +379,7 @@ command! T echomsg strftime("%c")
 " Autopep8  {{{
 " ========
 " Automatically fix PEP8 issues in the current buffer.
-command! Pep8 !autopep8 -i --max-line-length=120 %
+command! Pep8 !autopep8 -i --max-line-length=120 --ignore=E24,E26 %
 "}}}
 
 
@@ -422,7 +422,7 @@ function! g:UltiSnips_Complete()
         else
             call UltiSnips_JumpForwards()
             if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
+                return "\<TAB>"
             endif
         endif
     endif
@@ -468,7 +468,7 @@ nnoremap <silent> <Leader>fc :CtrlPBufTag<CR>
 " Syntastic {{{
 let g:syntastic_check_on_open=1
 let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_jump=1
+let g:syntastic_auto_jump=0
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args='--ignore=E501,E124'
 "}}}
