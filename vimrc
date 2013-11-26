@@ -59,7 +59,7 @@ set statusline=%f\ %m\ Line:%l/%L[%p%%]\ Col:%v\ Buf:#%n\ [%b][0x%B]
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
 
-" show the current the command in lower righ corner
+" show the current the command in lower right corner
 set showcmd
 
 " Show the current mode
@@ -149,6 +149,12 @@ if &listchars ==# 'eol:$'
     endif
 endif
 
+" Spelling...just english for now. Too lazy to generate the French one!
+set spell
+set spelllang=en
+
+" Diff always vertical
+set diffopt=filler,vertical
 
 "}}}
 
@@ -157,6 +163,7 @@ endif
 
 set backup
 set undofile
+set patchmode=.orig
 
 " All backup files at the same place. Don't like having .swp or .~ files everywhere
 " on my system
@@ -239,6 +246,12 @@ endif
 if &t_Co == 8 && $TERM !~# '^linux'
     set t_Co=16
 endif
+
+" Antialias fonts
+set antialias
+
+" Show tabs and trailing spaces
+:set listchars=tab:>-,trail:-
 
 "}}}
 
