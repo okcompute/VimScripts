@@ -163,7 +163,6 @@ set diffopt=filler,vertical
 
 set backup
 set undofile
-set patchmode=.orig
 
 " All backup files at the same place. Don't like having .swp or .~ files everywhere
 " on my system
