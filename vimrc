@@ -483,3 +483,7 @@ let g:ycm_confirm_extra_conf = 0
 let python_highlight_all = 1
 autocmd BufEnter *.py let b:python_version_2 = 1
 "}}}
+
+" Doxygen-syntax {{{
+au BufNewFile,BufRead *.dox,*doxygen setfiletype doxygen
+"}}}
