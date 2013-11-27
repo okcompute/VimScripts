@@ -458,6 +458,9 @@ let g:ctrlp_max_height = 20
 let g:ctrlp_max_files = 0
 " Unlimited depth 
 let g:ctrlp_max_depth = 100
+let g:ctrlp_buftag_types = {
+            \ 'objc'     : '--langdef=objc --langmap=objc:.m.h',
+            \ }
 nnoremap <silent> <Leader>ff :CtrlP<CR>
 nnoremap <silent> <Leader>fb :CtrlPBuffer<CR>
 nnoremap <silent> <Leader>ft :CtrlPTag<CR>
