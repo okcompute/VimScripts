@@ -100,7 +100,7 @@ set autoread
 set autowriteall
 
 " Automatic save when leaving insert mode (no save if file has not changed)
-:au InsertLeave * update
+autocmd InsertLeave * if &buftype != "nofile" | update | endif 
 
 " Make sure the line are displayed
 set number
@@ -149,9 +149,10 @@ if &listchars ==# 'eol:$'
     endif
 endif
 
-" Spelling...just english for now. Too lazy to generate the French one!
-set spell
+" Spelling on by default on filetype I know I will just write text...just
+" english for now. Too lazy to generate the French one!
 set spelllang=en
+autocmd FileType doxygen,text,gitcommit setlocal spell
 
 " Diff always vertical
 set diffopt=filler,vertical
