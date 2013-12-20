@@ -100,7 +100,7 @@ set autoread
 set autowriteall
 
 " Automatic save when leaving insert mode (no save if file has not changed)
-autocmd InsertLeave * if &buftype != "nofile" | update | endif 
+autocmd InsertLeave * if &buftype != "nofile" | update | endif
 
 " Make sure the line are displayed
 set number
@@ -300,7 +300,7 @@ endif
 "==================
 
 " Grep {{{
-set grepprg=ack\ --smart-case   
+set grepprg=ack\ --smart-case
 "}}}
 
 " Text files {{{
@@ -457,7 +457,7 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_max_height = 20
 " No limits on files
 let g:ctrlp_max_files = 0
-" Unlimited depth 
+" Unlimited depth
 let g:ctrlp_max_depth = 100
 let g:ctrlp_buftag_types = {
             \ 'objc'     : '--langdef=objc --langmap=objc:.m.h',
