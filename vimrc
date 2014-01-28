@@ -63,7 +63,11 @@ set laststatus=2
 set showcmd
 
 " Show the current mode
-set showmode
+if has('win32') || has ('win64')
+    set showmode
+else
+    set noshowmode " Hide the default mode text when Powerline is available.
+endif
 
 " Switch on syntax highlighting.
 syntax on
