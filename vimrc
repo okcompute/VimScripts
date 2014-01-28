@@ -159,6 +159,9 @@ autocmd FileType doxygen,text,gitcommit setlocal spell
 " Diff always vertical
 set diffopt=filler,vertical
 
+" Redraw only when we need to.
+set lazyredraw 
+
 "}}}
 
 " Backup files and directories {{{
