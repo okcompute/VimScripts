@@ -233,7 +233,7 @@ if has("gui_running")
     exe "set guifont=" . g:main_font
 
     " Select the color scheme
-    colorscheme wombat
+    colorscheme jellybeans
     if !exists("g:vimrcloaded")
         winpos 0 0
         if !&diff
