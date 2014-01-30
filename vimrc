@@ -62,8 +62,8 @@ set laststatus=2
 " show the current the command in lower right corner
 set showcmd
 
-" Show the current mode
-set showmode
+" Don't show the current mode 
+set noshowmode
 
 " Switch on syntax highlighting.
 syntax on
