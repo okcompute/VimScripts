@@ -77,6 +77,10 @@ set history=100
 " These commands open folds
 set foldopen=block,insert,mark,percent,quickfix,search,tag,undo
 
+" Have one fold open when opening a new buffer. This will reduce the number of
+" Zr I do in a day.
+set foldlevelstart=1
+
 " When the page starts to scroll, keep the cursor 8 lines from the top and 8
 " lines from the bottom
 set scrolloff=8
