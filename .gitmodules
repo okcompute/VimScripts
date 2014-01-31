@@ -57,6 +57,3 @@
 [submodule "bundle/python-syntax"]
 	path = bundle/python-syntax
 	url = https://github.com/hdima/python-syntax.git
-[submodule "bundle/jellybeans"]
-	path = bundle/jellybeans
-	url = https://github.com/nanotech/jellybeans.vim.git
