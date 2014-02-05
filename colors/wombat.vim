@@ -48,4 +48,5 @@ hi PreProc 		guifg=#e5786d gui=none
 hi Number		guifg=#e5786d gui=none
 hi Special		guifg=#e7f6da gui=none
 
-
+" Search highlight
+hi Search guibg=#FF0000
