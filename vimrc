@@ -106,7 +106,7 @@ set autowriteall
 " Automatic save when leaving insert mode (no save if file has not changed)
 " Patch: Force a call to SyntasticCheck. For some reason, a check is not
 " triggered on autocmd.
-autocmd InsertLeave * if &buftype != "nofile" | update | execute 'SyntasticCheck' | endif 
+autocmd InsertLeave * if &buftype != "nofile" | update | endif 
 
 " Make sure the line are displayed
 set number
