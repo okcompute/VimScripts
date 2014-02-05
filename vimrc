@@ -62,12 +62,8 @@ set laststatus=2
 " show the current the command in lower right corner
 set showcmd
 
-" Show the current mode
-if has('win32') || has ('win64')
-    set showmode
-else
-    set noshowmode " Hide the default mode text when Powerline is available.
-endif
+" Don't show the current mode 
+set noshowmode
 
 " Switch on syntax highlighting.
 syntax on
@@ -80,6 +76,10 @@ set history=100
 
 " These commands open folds
 set foldopen=block,insert,mark,percent,quickfix,search,tag,undo
+
+" Have one fold open when opening a new buffer. This will reduce the number of
+" Zr I do in a day.
+set foldlevelstart=1
 
 " When the page starts to scroll, keep the cursor 8 lines from the top and 8
 " lines from the bottom
@@ -162,6 +162,9 @@ autocmd FileType doxygen,text,gitcommit setlocal spell
 
 " Diff always vertical
 set diffopt=filler,vertical
+
+" Redraw only when we need to.
+set lazyredraw 
 
 "}}}
 
