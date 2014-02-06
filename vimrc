@@ -297,6 +297,9 @@ else
     " or higher (up to root).
     let s:vimrc_platform= findfile(".vimrc_platform", ".;")
 endif
+if filereadable(s:vimrc_platform)
+    exe "source " . expand(s:vimrc_platform)
+endif
 "}}}
 
 " Context specific
