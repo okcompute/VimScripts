@@ -100,8 +100,6 @@ set autoread
 set autowriteall
 
 " Automatic save when leaving insert mode (no save if file has not changed)
-" Patch: Force a call to SyntasticCheck. For some reason, a check is not
-" triggered on autocmd.
 autocmd InsertLeave * if &buftype != "nofile" | update | endif 
 
 " Make sure the line are displayed
@@ -244,7 +242,11 @@ if has("gui_running")
         let g:vimrcloaded = 1
     endif
 else
-    colorscheme wombat256mod
+    if &term =~ 'win32'
+        colorscheme default
+    else
+        colorscheme wombat256mod
+    endif
 endif
 
 " Allow color schemes do bright colors without forcing bold.
@@ -287,7 +289,17 @@ autocmd BufRead * call s:SetLocalVimrc()
 " e.g.: Directory to start vim into
 " The file must be located at the same level of current .vimrc file
 " or higher (up to root).
-let s:vimrc_platform= findfile(".vimrc_platform", ".;")
+if has('win32') || has ('win64')
+    " The file must be located in the same folder as .vimrc file
+    " NOTE: gvim and .; param for findfile does not work as expected on Windows!
+    " It seems that when gvim start and parse the vimrc, the path returned is
+    " the path of the 'Start menu'. menu'!!. Go figure.
+    let s:vimrc_platform= expand(escape($HOME, '\')."/.vimrc_platform")
+else
+    " The file must be located at the same level of current .vimrc file
+    " or higher (up to root).
+    let s:vimrc_platform= findfile(".vimrc_platform", ".;")
+endif
 if filereadable(s:vimrc_platform)
     exe "source " . expand(s:vimrc_platform)
 endif
@@ -398,12 +410,14 @@ nnoremap <silent> <Leader>u :GundoToggle<CR>
 
 " Powerline plugin {{{
 "-----------------------------------------------------------------------------
-set encoding=utf-8
+" set encoding=utf-8
+if &term !~ 'win32'
 python << EOF
 from powerline.vim import setup as powerline_setup
 powerline_setup()
 del powerline_setup
 EOF
+endif
 "}}}
 
 " UltiSnips plugin {{{
