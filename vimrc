@@ -8,6 +8,10 @@
 
 set nocompatible
 
+if has('win32') || has('win64')
+  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+endif
+
 " Get pathogen up and running
 filetype off
 call pathogen#infect()
@@ -458,8 +462,8 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.ctags']
 let g:ctrlp_extensions = ['tag', 'buffertag']
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v(\.git|\.hg|\.svn|environment|external|Build|buildfolder|pydev|memcached|Logs|dependencies|UserDoc|Extern|Doc|Images)$',
-  \ 'file': '\v(\.exe|\.so|\.dll|\.pdb|\.sln|\.suo|tags|\.csproj|\.txt|\.dox|\.jpg|\.jpeg|\.gif|\.png|\.bpt|\.tlog|\.pdf)$',
+  \ 'dir': '\v(\.git|\.hg|\.svn|environment|external|Build|buildfolder|pydev|memcached|Logs|dependencies|UserDoc|Extern|Images)$',
+  \ 'file': '\v(\.exe|\.so|\.dll|\.pdb|\.sln|\.suo|tags|\.csproj|\.txt|\.jpg|\.jpeg|\.gif|\.png|\.bpt|\.tlog|\.pdf)$',
   \ 'link': '',
   \ }
 let g:ctrlp_max_height = 20
