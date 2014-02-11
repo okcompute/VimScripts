@@ -50,3 +50,6 @@ hi Special		guifg=#e7f6da gui=none
 
 " Search highlight
 hi Search guibg=#FF0000
+
+" Trailing whitespace highlighting for plugins using this color
+highlight ExtraWhitespace guibg=#FF0000

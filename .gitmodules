@@ -66,3 +66,6 @@
 [submodule "bundle/vim-vinegar"]
 	path = bundle/vim-vinegar
 	url = https://github.com/tpope/vim-vinegar.git
+[submodule "bundle/vim-better-whitespace"]
+	path = bundle/vim-better-whitespace
+	url = https://github.com/ntpeters/vim-better-whitespace.git
