@@ -59,7 +59,7 @@ set laststatus=2
 " show the current the command in lower right corner
 set showcmd
 
-" Don't show the current mode 
+" Don't show the current mode
 set noshowmode
 
 " Switch on syntax highlighting.
@@ -101,7 +101,7 @@ set autoread
 set autowriteall
 
 " Automatic save when leaving insert mode (no save if file has not changed)
-autocmd InsertLeave * if &buftype != "nofile" | update | endif 
+autocmd InsertLeave * if &buftype != "nofile" | update | endif
 
 " Make sure the line are displayed
 set number
@@ -159,7 +159,7 @@ autocmd FileType doxygen,text,gitcommit setlocal spell
 set diffopt=filler,vertical
 
 " Redraw only when we need to.
-set lazyredraw 
+set lazyredraw
 
 "}}}
 
@@ -390,6 +390,14 @@ command! T echomsg strftime("%c")
 " ========
 " Automatically fix PEP8 issues in the current buffer.
 command! Pep8 !autopep8 -i --max-line-length=120 --ignore=E24,E26 %
+"}}}
+
+
+
+" Whitespaces  {{{
+" ========
+" Automatically remove whitespaces when saving a file
+autocmd FileType * autocmd BufWritePre <buffer> StripWhitespace
 "}}}
 
 
