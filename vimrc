@@ -244,7 +244,7 @@ if has("gui_running")
     endif
 else
     if &term =~ 'win32'
-        colorscheme default
+        colorscheme wombat
     else
         colorscheme wombat256mod
     endif
@@ -498,6 +498,7 @@ let g:syntastic_python_flake8_args='--ignore=E501,E124'
 
 " YouCompleteMe {{{
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
 "}}}
 
 " Python-syntax {{{
