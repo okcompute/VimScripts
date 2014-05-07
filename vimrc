@@ -463,6 +463,7 @@ endif
 let g:pymode_lint = 0
 let pymode_rope=0
 let g:pymode_syntax=0
+let g:pymode_utils_whitespaces = 0  " Use a better plugin for whitespace trimming
 "}}}
 
 " CtrlP {{{
