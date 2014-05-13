@@ -494,7 +494,7 @@ let g:syntastic_check_on_open=1
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_jump=0
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args='--ignore=E501,E124'
+let g:syntastic_python_flake8_args='--ignore=E501,E124,E265'
 "}}}
 
 " YouCompleteMe {{{
