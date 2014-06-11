@@ -1,1 +1,2 @@
 -R
+--exclude=*/third_party/*
