@@ -436,6 +436,7 @@ if has('win32') || has('win64')
 else
     let g:ultisnips_python_style="sphinx"
 endif
+
 let g:UltiSnipsExpandTrigger="<tab>"
 function! g:UltiSnips_Complete()
     call UltiSnips#ExpandSnippet()
