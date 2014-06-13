@@ -431,9 +431,12 @@ endif
 
 " UltiSnips plugin {{{
 "-----------------------------------------------------------------------------
+if has('win32') || has('win64')
+    let g:ultisnips_python_style="doxygen"
+else
+    let g:ultisnips_python_style="sphinx"
+endif
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 function! g:UltiSnips_Complete()
     call UltiSnips#ExpandSnippet()
     if g:ulti_expand_res == 0
