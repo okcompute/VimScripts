@@ -225,7 +225,7 @@ set background=dark
 if has("mac")
     let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
 else
-    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h13"
+    let g:main_font = "Anonymice_Powerline:h13"
 endif
 
 if has("gui_running")
@@ -515,4 +515,8 @@ autocmd BufEnter *.py let b:python_version_2 = 1
 
 " Doxygen-syntax {{{
 au BufNewFile,BufRead *.dox,*doxygen setfiletype doxygen
+"}}}
+
+" Vim-notes {{{
+let g:notes_directories = ['~/Notes']
 "}}}
