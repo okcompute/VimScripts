@@ -78,3 +78,6 @@
 [submodule "bundle/vim-snippets"]
 	path = bundle/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
+[submodule "bundle/vim-simple-session"]
+	path = bundle/vim-simple-session
+	url = https://github.com/manuel-colmenero/vim-simple-session.git
