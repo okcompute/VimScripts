@@ -1,7 +1,6 @@
 ###########################################################################
 #                            TEXTMATE SNIPPETS                            #
 ###########################################################################
-
 #####################
 # Assertions & Tests #
 #####################
@@ -10,4 +9,8 @@ snippet pdb "Set PDB breakpoint" !b
 import sys;sys.path.append("d://PydevDebug");import pydevd;pydevd.settrace()
 endsnippet
 
-# vim:ft=snippets:
+snippet copyfn "Copy a function content and parameter"
+context "$1" do
+    ${0:${VISUAL:# assertions...}}
+end
+endsnippet

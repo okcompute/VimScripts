@@ -454,6 +454,9 @@ function! g:UltiSnips_Complete()
 endfunction
 
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+" This is to fix the sniptted path on windows. By default, UltiSnips uses "vimfiles"
+" under Windows. Does not work for me, everything is under "~/.vim"
+let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
 "}}}
 
 " Matchit plugin {{{
@@ -475,7 +478,7 @@ let g:pymode_virtualenv = 1
 " CtrlP {{{
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.ctags']
-let g:ctrlp_extensions = ['tag', 'buffertag']
+let g:ctrlp_extensions = ['tag', 'buffertag', 'session']
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\v(\.git|\.hg|\.svn|environment|external|Build|buildfolder|pydev|memcached|Logs|dependencies|UserDoc|Extern|Images)$',
   \ 'file': '\v(\.exe|\.so|\.dll|\.pdb|\.sln|\.suo|tags|\.csproj|\.txt|\.jpg|\.jpeg|\.gif|\.png|\.bpt|\.tlog|\.pdf)$',
@@ -493,6 +496,7 @@ nnoremap <silent> <Leader>ff :CtrlP<CR>
 nnoremap <silent> <Leader>fb :CtrlPBuffer<CR>
 nnoremap <silent> <Leader>ft :CtrlPTag<CR>
 nnoremap <silent> <Leader>fc :CtrlPBufTag<CR>
+nnoremap <silent> <Leader>fs :CtrlPSession<CR>
 "}}}
 
 " Syntastic {{{
