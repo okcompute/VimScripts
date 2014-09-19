@@ -505,6 +505,7 @@ let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_jump=0
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args='--ignore=E501,E124,E265'
+let g:syntastic_haskell_ghc_mod_args='-g -fno-warn-type-defaults'
 "}}}
 
 " YouCompleteMe {{{
@@ -523,4 +524,15 @@ au BufNewFile,BufRead *.dox,*doxygen setfiletype doxygen
 
 " Vim-notes {{{
 let g:notes_directories = ['~/Notes']
+"}}}
+
+" neocomplcache-gch {{{
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
+"}}}
+
+" ghc-mod {{{
+if has("mac")
+    " Add ghc-mod to path. MacVim don't load user `.profile` file
+    let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin')
+endif
 "}}}
