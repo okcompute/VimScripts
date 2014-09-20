@@ -29,35 +29,34 @@ Plugin 'gmarik/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'sjl/gundo.vim'
-Plugin 'Sjl/gundo.vim'
-Plugin 'Vim-scripts/AutoTag'
+Plugin 'Dag/vim2hs'
 Plugin 'Derekwyatt/vim-fswitch'
+Plugin 'Eagletmt/ghcmod-vim'
+Plugin 'Eagletmt/neco-ghc'
+Plugin 'Hdima/python-syntax'
+Plugin 'Honza/vim-snippets'
+Plugin 'Kien/ctrlp.vim'
+Plugin 'Klen/python-mode'
+Plugin 'Manuel-colmenero/vim-simple-session'
 Plugin 'Michaeljsmith/vim-indent-object'
 Plugin 'Msanders/cocoa.vim'
-Plugin 'Tpope/vim-commentary'
-Plugin 'Tpope/vim-repeat'
-Plugin 'Vim-scripts/bufkill.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'Vim-scripts/python_match.vim'
-Plugin 'Kien/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'Okcompute/python-mode'
-Plugin 'Tpope/vim-fugitive'
+Plugin 'Ntpeters/vim-better-whitespace'
 Plugin 'Scrooloose/syntastic'
-Plugin 'Hdima/python-syntax'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'Sjl/gundo.vim'
+Plugin 'Tpope/vim-commentary'
+Plugin 'Tpope/vim-fugitive'
+Plugin 'Tpope/vim-repeat'
 Plugin 'Tpope/vim-surround'
 Plugin 'Tpope/vim-unimpaired'
 Plugin 'Tpope/vim-vinegar'
-Plugin 'Ntpeters/vim-better-whitespace'
-Plugin 'Xolox/vim-notes'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'Vim-scripts/AutoTag'
+Plugin 'Vim-scripts/bufkill.vim'
+Plugin 'Vim-scripts/python_match.vim'
 Plugin 'Xolox/vim-misc'
-Plugin 'Honza/vim-snippets'
-Plugin 'Manuel-colmenero/vim-simple-session'
-Plugin 'Eagletmt/neco-ghc'
-Plugin 'Eagletmt/ghcmod-vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Dag/vim2hs'
+Plugin 'Xolox/vim-notes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -523,6 +522,8 @@ let g:pymode_virtualenv = 1
 "}}}
 
 " CtrlP {{{
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+let g:ctrlp_use_caching = 0
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.ctags']
 let g:ctrlp_extensions = ['tag', 'buffertag', 'session']
