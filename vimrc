@@ -3,7 +3,7 @@
 " Vim
 "====
 
-" Global Stuff {{{
+" Runtime path {{{
 "=================
 
 set nocompatible
@@ -12,11 +12,60 @@ if has('win32') || has('win64')
   set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 endif
 
-" Get pathogen up and running
-filetype off
-call pathogen#infect()
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+"}}}
+
+" Vundle {{{
+" ==========
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'sjl/gundo.vim'
+Plugin 'Sjl/gundo.vim'
+Plugin 'Vim-scripts/AutoTag'
+Plugin 'Derekwyatt/vim-fswitch'
+Plugin 'Michaeljsmith/vim-indent-object'
+Plugin 'Msanders/cocoa.vim'
+Plugin 'Tpope/vim-commentary'
+Plugin 'Tpope/vim-repeat'
+Plugin 'Vim-scripts/bufkill.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'Vim-scripts/python_match.vim'
+Plugin 'Kien/ctrlp.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'Okcompute/python-mode'
+Plugin 'Tpope/vim-fugitive'
+Plugin 'Scrooloose/syntastic'
+Plugin 'Hdima/python-syntax'
+Plugin 'Tpope/vim-surround'
+Plugin 'Tpope/vim-unimpaired'
+Plugin 'Tpope/vim-vinegar'
+Plugin 'Ntpeters/vim-better-whitespace'
+Plugin 'Xolox/vim-notes'
+Plugin 'Xolox/vim-misc'
+Plugin 'Honza/vim-snippets'
+Plugin 'Manuel-colmenero/vim-simple-session'
+Plugin 'Eagletmt/neco-ghc'
+Plugin 'Eagletmt/ghcmod-vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Dag/vim2hs'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
+"}}}
+
+" Global stuff  {{{
+"==================
 
 " Set filetype stuff to on
 filetype on
@@ -391,8 +440,6 @@ command! T echomsg strftime("%c")
 " Automatically fix PEP8 issues in the current buffer.
 command! Pep8 !autopep8 -i --max-line-length=120 --ignore=E24,E26 %
 "}}}
-
-
 
 " Whitespaces  {{{
 " ========
