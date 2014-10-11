@@ -20,8 +20,6 @@ endif
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
@@ -29,6 +27,7 @@ Plugin 'gmarik/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
+Plugin 'Altercation/vim-colors-solarized'
 Plugin 'Dag/vim2hs'
 Plugin 'Derekwyatt/vim-fswitch'
 Plugin 'Eagletmt/ghcmod-vim'
@@ -198,16 +197,12 @@ if &listchars ==# 'eol:$'
     endif
 endif
 
-" Spelling on by default on filetype I know I will just write text...just
-" english for now. Too lazy to generate the French one!
+" Activate spelling all the time
 set spelllang=en
-autocmd FileType doxygen,text,gitcommit setlocal spell
+set spell
 
 " Diff always vertical
 set diffopt=filler,vertical
-
-" Redraw only when we need to.
-set lazyredraw
 
 "}}}
 
@@ -231,14 +226,7 @@ if has("unix") " (including OS X)
     set undodir^=~/tmp//,.
 
 elseif has('win32') || has ('win64')
-    " Save backup , swap and undo files in the current user's TEMP directory
-    " (that is, whatever the TEMP environment variable is set to).
-    " If not available, use the current directory.
-    " set backupdir^=$TEMP.'\vim\backup\\',.
-    " set undodir^=$TEMP.'\vim\undo\\',.
-    " set directory^=$TEMP.'\vim\swap\\,.
-    "
-    " Main vim backup folder
+    " Create main Vim backup folder
     let s:temp_vim_dir = $TEMP . "/vim"
     if finddir(s:temp_vim_dir, &rtp) ==# ''
         call mkdir(s:temp_vim_dir)
@@ -251,13 +239,14 @@ elseif has('win32') || has ('win64')
     endif
     execute "set backupdir^=".s:backup_dir."//"
 
-    " Undo dir
+    " Undo folder
     let s:undo_dir = $TEMP . "/vim/undo"
     if finddir(s:undo_dir, &rtp) ==# ''
         call mkdir(s:undo_dir)
     endif
     execute "set undodir^=".s:undo_dir."//"
 
+    " Swap folder
     let s:swap_dir = $TEMP . "/vim/swap"
     if finddir(s:swap_dir, &rtp) ==# ''
         call mkdir(s:swap_dir)
@@ -270,44 +259,31 @@ endif
 " =====================================
 set background=dark
 
-if has("mac")
-    let g:main_font = "Anonymous\\ Pro\\ for\\ Powerline:h14"
-else
-    let g:main_font = "Anonymice_Powerline:h13"
-endif
-
 if has("gui_running")
-    exe "set guifont=" . g:main_font
-
     " Select the color scheme
-    colorscheme wombat
-    if !exists("g:vimrcloaded")
-        winpos 0 0
-        if !&diff
-            winsize 130 120
-        else
-            winsize 227 120
-        endif
-        let g:vimrcloaded = 1
+    colorscheme solarized
+
+    " Set the font
+    if has("mac")
+        let g:main_font = "Anonymice_Powerline:h14"
+    else
+        let g:main_font = "Anonymice_Powerline:h13"
     endif
+    exe "set guifont=" . g:main_font
 else
+    " Select the color scheme
     if &term =~ 'win32'
         colorscheme wombat
     else
-        colorscheme wombat256mod
+        colorscheme solarized
     endif
+
+    " VGA palette
+    set t_Co=256
 endif
 
-" Allow color schemes do bright colors without forcing bold.
-if &t_Co == 8 && $TERM !~# '^linux'
-    set t_Co=16
-endif
-
-" Antialias fonts
+" Anti alias fonts
 set antialias
-
-" Show tabs and trailing spaces
-:set listchars=tab:>-,trail:-
 
 "}}}
 
@@ -383,45 +359,6 @@ autocmd! FileChangedShell *
             \ endif
 "}}}
 
-" Dash search {{{
-
-"-----------------------------------------------------------------------------
-" Searches Dash for the word under your cursor in vim.
-if has('mac')
-function! SearchDash()
-    " Some setup
-    let s:browser = "/usr/bin/open"
-    " Run it
-    let s:url = "dash://".expand("<cword>")
-    let s:cmd ="silent ! " . s:browser . " " . s:url
-    execute s:cmd
-    redraw!
-endfunction
-
-command! Dash :call SearchDash()<CR>
-endif
-"}}}
-
-" Google search {{{
-"-----------------------------------------------------------------------------
-function! SearchGoogle()
-    " Some setup
-    let s:browser = "open"
-if has('win32') || has ('win64')
-    let s:browser = "cygstart"
-endif
-    let s:wordUnderCursor = expand("<cword>")
-
-    " Run it
-    let s:url = "https://www.google.com/search?q=".s:wordUnderCursor
-    let s:cmd ="silent !".s:browser." ".s:url
-    execute s:cmd
-    redraw!
-endfunction
-
-command! Google :call SearchGoogle()
-"}}}
-
 " JSON {{{
 " ========
 autocmd BufNewFile,BufRead *.json set ft=javascript
@@ -475,6 +412,7 @@ EOF
 endif
 "}}}
 
+
 " UltiSnips plugin {{{
 "-----------------------------------------------------------------------------
 if has('win32') || has('win64')
@@ -519,6 +457,7 @@ let pymode_rope=0
 let g:pymode_syntax=0
 let g:pymode_trim_whitespaces = 0 " Use a better plugin for whitespace trimming
 let g:pymode_virtualenv = 1
+let g:pymode_options_colorcolumn = 0
 "}}}
 
 " CtrlP {{{
